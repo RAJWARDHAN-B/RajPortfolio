@@ -4,7 +4,7 @@ import NetflixNav from "@/components/NetflixNav";
 import HeroSection from "@/components/HeroSection";
 import ContentRow, { projectItems, experienceItems, skillItems } from "@/components/ContentRow";
 import AboutSection from "@/components/AboutSection";
-// import StrangerThings3D from "@/components/StrangerThings3D";
+import StrangerThings3D from "@/components/StrangerThings3D";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 
@@ -36,7 +36,7 @@ const Index = () => {
             <ContentRow title="Skills & Technologies" items={skillItems} />
 
             <AboutSection />
-            {/* <StrangerThings3D /> */}
+            <StrangerThings3D />
             <ContactSection />
             <Footer />
           </div>
