@@ -22,14 +22,13 @@ const NetflixNav = () => {
 
   return (
     <nav
-      className={`netflix-nav ${
-        scrolled ? "netflix-nav-scrolled" : "netflix-nav-transparent"
-      }`}
+      className={`netflix-nav ${scrolled ? "netflix-nav-scrolled" : "netflix-nav-transparent"
+        }`}
     >
       <div className="flex items-center justify-between px-4 md:px-12 py-3">
         <div className="flex items-center gap-8">
           <span className="font-display text-primary text-3xl md:text-4xl tracking-wider cursor-pointer" onClick={() => scrollTo("home")}>
-            PORTFOLIO
+            Rajwardhan
           </span>
 
           {/* Desktop nav */}
