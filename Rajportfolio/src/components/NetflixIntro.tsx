@@ -9,10 +9,26 @@ const NetflixIntro = ({ onComplete }: { onComplete: () => void }) => {
   useEffect(() => {
     const audio = new Audio(tudumSound);
     audioRef.current = audio;
-    audio.volume = 0.5;
-    audio.play().catch(() => {
-      // Autoplay blocked, skip sound
-    });
+    audio.volume = 0.8; // Increased volume
+
+    const playAudio = () => {
+      audio.play().then(() => {
+        console.log("Audio playing successfully");
+      }).catch((err) => {
+        console.warn("Autoplay blocked, waiting for user interaction:", err);
+      });
+    };
+
+    playAudio();
+
+    // Fallback: Play on first click if blocked
+    const handleFirstInteraction = () => {
+      if (audio.paused) {
+        playAudio();
+      }
+      window.removeEventListener("click", handleFirstInteraction);
+    };
+    window.addEventListener("click", handleFirstInteraction);
 
     const timer1 = setTimeout(() => setPhase("letter"), 500);
     const timer2 = setTimeout(() => {
@@ -24,6 +40,7 @@ const NetflixIntro = ({ onComplete }: { onComplete: () => void }) => {
       clearTimeout(timer1);
       clearTimeout(timer2);
       audio.pause();
+      window.removeEventListener("click", handleFirstInteraction);
     };
   }, [onComplete]);
 
