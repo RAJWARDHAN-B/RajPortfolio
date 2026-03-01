@@ -1,13 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import tudumSound from "@/assets/sound/netflix-tudum-sfx-n-c.mp3";
 
 const NetflixIntro = ({ onComplete }: { onComplete: () => void }) => {
   const [phase, setPhase] = useState<"sound" | "letter" | "done">("sound");
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    // Use Netflix "ta-dum" sound from a public source
-    const audio = new Audio("https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3");
+    const audio = new Audio(tudumSound);
     audioRef.current = audio;
     audio.volume = 0.5;
     audio.play().catch(() => {
