@@ -52,40 +52,23 @@ const NetflixIntro = ({ onComplete }: { onComplete: () => void }) => {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <div className="netflix-intro-letter w-full max-w-[900px] px-4 py-8 flex justify-center items-center">
-            <svg
-              viewBox="0 0 900 200"
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-full h-auto drop-shadow-[0_0_25px_rgba(229,9,20,0.8)]"
-            >
-              <defs>
-                <linearGradient id="netflixGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stopColor="#E50914" />
-                  <stop offset="100%" stopColor="#B20710" />
-                </linearGradient>
-              </defs>
-
-              <text
-                x="50%"
-                y="100"
-                fontFamily="'Bebas Neue', sans-serif"
-                textAnchor="middle"
-                dominantBaseline="middle"
-                fill="url(#netflixGradient)"
-                className="select-none"
-              >
-                <tspan fontSize="120">R</tspan>
-                <tspan fontSize="110">A</tspan>
-                <tspan fontSize="100">J</tspan>
-                <tspan fontSize="90">W</tspan>
-                <tspan fontSize="80">A</tspan>
-                <tspan fontSize="80">R</tspan>
-                <tspan fontSize="90">D</tspan>
-                <tspan fontSize="100">H</tspan>
-                <tspan fontSize="110">A</tspan>
-                <tspan fontSize="120">N</tspan>
-              </text>
-            </svg>
+          <div className="relative w-full max-w-[600px] px-8 flex justify-center items-center">
+            <motion.img
+              src="/Rnetflixfulltext.png"
+              alt="RAJWARDHAN"
+              className="w-full h-auto drop-shadow-[0_0_50px_rgba(229,9,20,0.6)]"
+              initial={{ scale: 0.5, opacity: 0, filter: "brightness(0)" }}
+              animate={{
+                scale: phase === "letter" ? [0.5, 1, 1.1, 12] : 0.5,
+                opacity: phase === "letter" ? [0, 1, 1, 0] : 0,
+                filter: phase === "letter" ? ["brightness(0)", "brightness(1)", "brightness(1.2)", "brightness(2)"] : "brightness(0)"
+              }}
+              transition={{
+                duration: 4,
+                times: [0, 0.1, 0.8, 1],
+                ease: "easeInOut"
+              }}
+            />
           </div>
         </motion.div>
       )}

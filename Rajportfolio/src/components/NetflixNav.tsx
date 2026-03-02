@@ -27,9 +27,12 @@ const NetflixNav = () => {
     >
       <div className="flex items-center justify-between px-4 md:px-12 py-3">
         <div className="flex items-center gap-8">
-          <span className="font-display text-primary text-3xl md:text-4xl tracking-wider cursor-pointer" onClick={() => scrollTo("home")}>
-            RAJWARDHAN
-          </span>
+          <img
+            src="/Rnetflixfulltext.png"
+            alt="RAJWARDHAN"
+            className="h-8 md:h-10 cursor-pointer object-contain"
+            onClick={() => scrollTo("home")}
+          />
 
           {/* Desktop nav */}
           <ul className="hidden md:flex items-center gap-5">
@@ -49,8 +52,12 @@ const NetflixNav = () => {
         <div className="flex items-center gap-4">
           <Search className="w-5 h-5 text-foreground cursor-pointer hover:text-muted-foreground transition-colors" />
           <Bell className="w-5 h-5 text-foreground cursor-pointer hover:text-muted-foreground transition-colors" />
-          <div className="w-8 h-8 rounded bg-primary flex items-center justify-center text-primary-foreground text-sm font-bold">
-            R
+          <div className="w-8 h-8 rounded overflow-hidden flex items-center justify-center cursor-pointer">
+            <img
+              src="/Rnetflixicon.png"
+              alt="Profile"
+              className="w-full h-full object-cover"
+            />
           </div>
 
           {/* Mobile hamburger */}
