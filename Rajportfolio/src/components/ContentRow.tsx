@@ -231,4 +231,23 @@ export const skillItems: ContentItem[] = [
   { id: 18, title: "UI/UX Design", image: project6, match: "Advanced", tags: ["Figma", "Motion", "A11y", "Design Systems"], description: "3+ years", longDescription: "Strong eye for design with proficiency in Figma, prototyping, and design systems. Experience with motion design using Framer Motion and CSS animations. Advocate for accessibility (WCAG 2.1) and inclusive design practices.", year: "3+ years", category: "Design" },
 ];
 
+export const techStackItems: ContentItem[] = [
+  { id: 19, title: "Frontend Stack", image: project1, match: "Primary", tags: ["React", "Next.js", "Tailwind", "Framer Motion"], description: "Modern UI development", longDescription: "Comprehensive frontend development using the latest React features and Tailwind CSS for rapid, responsive design.", year: "2026", category: "Frontend" },
+  { id: 20, title: "Backend Stack", image: project4, match: "Primary", tags: ["Node.js", "NestJS", "PostgreSQL", "Redis"], description: "Scalable server logic", longDescription: "Building robust backend services with microservices architecture and efficient data management.", year: "2026", category: "Backend" },
+  { id: 21, title: "Tools & DevOps", image: project2, match: "Primary", tags: ["Docker", "Kubernetes", "GitHub Actions", "Terraform"], description: "Infrastructure & Automation", longDescription: "Streamlining deployment pipelines and managing cloud infrastructure for high-availability applications.", year: "2026", category: "DevOps" },
+];
+
+export const languageItems: ContentItem[] = [
+  { id: 22, title: "JavaScript/TypeScript", image: project3, match: "Native", tags: ["ES6+", "TS 5.0", "Node", "Browser"], description: "Core Programming", longDescription: "Deep understanding of JavaScript internals, asynchronous programming, and TypeScript's advanced type system.", year: "8+ years", category: "Core" },
+  { id: 23, title: "Python", image: project5, match: "Fluent", tags: ["Data Science", "Automation", "Django", "FastAPI"], description: "Scripting & Data", longDescription: "Expertise in Python for various applications from simple automation scripts to complex machine learning models.", year: "5+ years", category: "Versatile" },
+  { id: 24, title: "Go", image: project6, match: "Proficient", tags: ["Concurrency", "Microservices", "Performance"], description: "High-performance", longDescription: "Implementing efficient, concurrent backend services where performance and reliability are paramount.", year: "2+ years", category: "Systems" },
+];
+
+export const certificationItems: ContentItem[] = [
+  { id: 25, title: "AWS Solutions Architect", image: project2, match: "Certified", tags: ["Cloud", "Architecture", "Security"], description: "Associate Level", longDescription: "Validates ability to design and deploy scalable, highly available, and fault-tolerant systems on AWS.", year: "2023", category: "AWS" },
+  { id: 26, title: "Professional Google Developer", image: project1, match: "Certified", tags: ["Cloud", "Firebase", "Web"], description: "Mobile Web Specialist", longDescription: "Demonstrates advanced skill in web performance, accessibility, and offline-first applications.", year: "2024", category: "Google" },
+  { id: 27, title: "Meta Front-End Developer", image: project3, match: "Certified", tags: ["React", "UX", "Web"], description: "Professional Cert", longDescription: "Comprehensive training in modern front-end development, responsive design, and iterative testing.", year: "2023", category: "Meta" },
+];
+
 export default ContentRow;
+
