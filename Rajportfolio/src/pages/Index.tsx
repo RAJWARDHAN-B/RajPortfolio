@@ -11,7 +11,7 @@ import ContentRow, {
   certificationItems
 } from "@/components/ContentRow";
 import AboutSection from "@/components/AboutSection";
-// import StrangerThings3D from "@/components/StrangerThings3D";
+import StrangerThings3D from "@/components/StrangerThings3D";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 
@@ -57,7 +57,7 @@ const Index = () => {
             </section>
 
             <AboutSection />
-            {/* <StrangerThings3D /> */}
+            <StrangerThings3D />
             <ContactSection />
             <Footer />
           </div>
