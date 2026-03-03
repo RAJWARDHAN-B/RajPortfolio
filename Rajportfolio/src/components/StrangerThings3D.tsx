@@ -1,209 +1,236 @@
-import { useRef, useMemo, useState } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { Text, Float, Stars, MeshDistortMaterial } from "@react-three/drei";
+import { useRef, useMemo, useState, useEffect, Suspense } from "react";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { Text, Float, Stars, OrbitControls } from "@react-three/drei";
 import { motion, AnimatePresence } from "framer-motion";
 import * as THREE from "three";
 import { projectItems, type ContentItem } from "./ContentRow";
-import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { X, ChevronRight } from "lucide-react";
 
-// Floating particles like Stranger Things ash/embers
-const Particles = ({ count = 200 }: { count?: number }) => {
+// Floating particles
+const Particles = ({ count = 50 }: { count?: number }) => {
   const mesh = useRef<THREE.Points>(null);
   const positions = useMemo(() => {
     const pos = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
-      pos[i * 3] = (Math.random() - 0.5) * 30;
-      pos[i * 3 + 1] = (Math.random() - 0.5) * 20;
-      pos[i * 3 + 2] = (Math.random() - 0.5) * 15;
+      pos[i * 3] = (Math.random() - 0.5) * 20;
+      pos[i * 3 + 1] = (Math.random() - 0.5) * 14;
+      pos[i * 3 + 2] = (Math.random() - 0.5) * 10;
     }
     return pos;
-  }, [count]);
-
-  const colors = useMemo(() => {
-    const cols = new Float32Array(count * 3);
-    for (let i = 0; i < count; i++) {
-      const isRed = Math.random() > 0.6;
-      cols[i * 3] = isRed ? 0.9 : 0.3;
-      cols[i * 3 + 1] = isRed ? 0.1 : 0.1;
-      cols[i * 3 + 2] = isRed ? 0.1 : 0.15;
-    }
-    return cols;
   }, [count]);
 
   useFrame((state) => {
     if (!mesh.current) return;
     mesh.current.rotation.y = state.clock.elapsedTime * 0.02;
-    mesh.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.01) * 0.1;
   });
 
   return (
     <points ref={mesh}>
       <bufferGeometry>
         <bufferAttribute attach="attributes-position" count={count} array={positions} itemSize={3} />
-        <bufferAttribute attach="attributes-color" count={count} array={colors} itemSize={3} />
       </bufferGeometry>
-      <pointsMaterial size={0.05} vertexColors transparent opacity={0.8} sizeAttenuation />
+      <pointsMaterial size={0.06} color="#e50914" transparent opacity={0.6} sizeAttenuation />
     </points>
   );
 };
 
-// The Upside Down portal
+// Glowing portal ring
 const Portal = () => {
   const meshRef = useRef<THREE.Mesh>(null);
-
   useFrame((state) => {
     if (!meshRef.current) return;
-    meshRef.current.rotation.z = state.clock.elapsedTime * 0.3;
+    meshRef.current.rotation.z = state.clock.elapsedTime * 0.2;
   });
 
   return (
-    <mesh ref={meshRef} position={[0, 2.5, -5]}>
-      <torusGeometry args={[1.5, 0.05, 16, 100]} />
-      <meshStandardMaterial color="#e50914" emissive="#e50914" emissiveIntensity={2} />
+    <mesh ref={meshRef} position={[0, 2, -6]}>
+      <torusGeometry args={[1.8, 0.04, 16, 64]} />
+      <meshBasicMaterial color="#e50914" />
     </mesh>
   );
 };
 
-// Floating 3D project card
+// Simple 3D project card using basic materials
 const ProjectCard3D = ({
   item,
   position,
+  index,
   onClick,
 }: {
   item: ContentItem;
   position: [number, number, number];
+  index: number;
   onClick: () => void;
 }) => {
-  const meshRef = useRef<THREE.Mesh>(null);
+  const groupRef = useRef<THREE.Group>(null);
   const [hovered, setHovered] = useState(false);
 
   useFrame((state) => {
-    if (!meshRef.current) return;
-    meshRef.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.5 + position[0]) * 0.1;
+    if (!groupRef.current) return;
+    groupRef.current.position.y =
+      position[1] + Math.sin(state.clock.elapsedTime * 0.8 + index * 1.2) * 0.15;
+    groupRef.current.rotation.y =
+      Math.sin(state.clock.elapsedTime * 0.3 + index) * 0.08;
   });
 
   return (
-    <Float speed={2} rotationIntensity={0.2} floatIntensity={0.5}>
-      <group position={position}>
-        <mesh
-          ref={meshRef}
-          onClick={onClick}
-          onPointerEnter={() => setHovered(true)}
-          onPointerLeave={() => setHovered(false)}
-          scale={hovered ? 1.15 : 1}
-        >
-          <boxGeometry args={[2.2, 3, 0.1]} />
-          <MeshDistortMaterial
-            color={hovered ? "#e50914" : "#1a1a1a"}
-            emissive={hovered ? "#e50914" : "#330000"}
-            emissiveIntensity={hovered ? 0.5 : 0.15}
-            roughness={0.3}
-            metalness={0.8}
-            distort={hovered ? 0.15 : 0.05}
-            speed={2}
-          />
-        </mesh>
-        <Text
-          position={[0, -0.2, 0.1]}
-          fontSize={0.18}
-          color="white"
-          maxWidth={1.8}
-          textAlign="center"
-          font="https://fonts.gstatic.com/s/bebasneue/v14/JTUSjIg69CK48gW7PXooxW5rygbi49c.woff2"
-          anchorY="middle"
-        >
-          {item.title.toUpperCase()}
-        </Text>
-        <Text
-          position={[0, -0.7, 0.1]}
-          fontSize={0.1}
-          color="#e50914"
-          maxWidth={1.8}
-          textAlign="center"
-        >
-          {item.match}
-        </Text>
-        <Text
-          position={[0, -0.95, 0.1]}
-          fontSize={0.08}
-          color="#888888"
-          maxWidth={1.8}
-          textAlign="center"
-        >
-          {item.tags.slice(0, 3).join(" • ")}
-        </Text>
-      </group>
-    </Float>
+    <group
+      ref={groupRef}
+      position={position}
+      onClick={(e) => { e.stopPropagation(); onClick(); }}
+      onPointerOver={(e) => { e.stopPropagation(); setHovered(true); document.body.style.cursor = "pointer"; }}
+      onPointerOut={() => { setHovered(false); document.body.style.cursor = "auto"; }}
+      scale={hovered ? 1.1 : 1}
+    >
+      {/* Card background */}
+      <mesh>
+        <boxGeometry args={[2, 2.8, 0.08]} />
+        <meshStandardMaterial
+          color={hovered ? "#e50914" : "#1a1a2e"}
+          emissive={hovered ? "#e50914" : "#220000"}
+          emissiveIntensity={hovered ? 0.6 : 0.2}
+          roughness={0.4}
+          metalness={0.7}
+        />
+      </mesh>
+
+      {/* Card border glow */}
+      <mesh position={[0, 0, -0.01]}>
+        <boxGeometry args={[2.1, 2.9, 0.02]} />
+        <meshBasicMaterial color={hovered ? "#ff3333" : "#330000"} />
+      </mesh>
+
+      {/* Title */}
+      <Text
+        position={[0, 0.2, 0.06]}
+        fontSize={0.16}
+        color="white"
+        maxWidth={1.6}
+        textAlign="center"
+        anchorY="middle"
+      >
+        {item.title.toUpperCase()}
+      </Text>
+
+      {/* Match badge */}
+      <Text
+        position={[0, -0.3, 0.06]}
+        fontSize={0.11}
+        color="#e50914"
+        maxWidth={1.6}
+        textAlign="center"
+      >
+        {item.match}
+      </Text>
+
+      {/* Tags */}
+      <Text
+        position={[0, -0.7, 0.06]}
+        fontSize={0.08}
+        color="#888888"
+        maxWidth={1.6}
+        textAlign="center"
+      >
+        {item.tags.slice(0, 3).join(" · ")}
+      </Text>
+
+      {/* Year */}
+      <Text
+        position={[0, -1.0, 0.06]}
+        fontSize={0.09}
+        color="#555555"
+        maxWidth={1.6}
+        textAlign="center"
+      >
+        {item.year}
+      </Text>
+    </group>
   );
 };
 
-// Title text
-const StrangerTitle = () => {
-  return (
-    <Float speed={1} rotationIntensity={0.05} floatIntensity={0.3}>
-      <Text
-        position={[0, 4.5, -3]}
-        fontSize={0.9}
-        color="#e50914"
-        font="https://fonts.gstatic.com/s/bebasneue/v14/JTUSjIg69CK48gW7PXooxW5rygbi49c.woff2"
-        anchorY="middle"
-        textAlign="center"
-      >
-        THE UPSIDE DOWN
-      </Text>
-      <Text
-        position={[0, 3.7, -3]}
-        fontSize={0.2}
-        color="#666666"
-        anchorY="middle"
-        textAlign="center"
-      >
-        EXPLORE PROJECTS IN 3D
-      </Text>
-    </Float>
-  );
-};
+// Scene title
+const SceneTitle = () => (
+  <group position={[0, 4, -4]}>
+    <Text
+      fontSize={0.8}
+      color="#e50914"
+      anchorY="middle"
+      textAlign="center"
+    >
+      THE UPSIDE DOWN
+    </Text>
+    <Text
+      position={[0, -0.7, 0]}
+      fontSize={0.18}
+      color="#666666"
+      anchorY="middle"
+      textAlign="center"
+    >
+      CLICK A CARD TO EXPLORE
+    </Text>
+  </group>
+);
 
 const Scene = ({ onSelectProject }: { onSelectProject: (item: ContentItem) => void }) => {
   const positions: [number, number, number][] = [
-    [-4, 0.5, -2],
-    [-1.5, 1, -1],
-    [1.5, 0.5, -2],
-    [4, 1, -1],
-    [-2.5, -2, -1.5],
-    [2.5, -2, -1.5],
+    [-3.5, 0.5, 0],
+    [-1.2, 1.2, -1],
+    [1.2, 0.5, 0],
+    [3.5, 1.2, -1],
+    [-2.2, -2, -0.5],
+    [2.2, -2, -0.5],
   ];
 
   return (
     <>
-      <ambientLight intensity={0.15} />
-      <pointLight position={[0, 5, 5]} intensity={1} color="#e50914" />
-      <pointLight position={[-5, -3, 3]} intensity={0.5} color="#ff3333" />
-      <pointLight position={[5, -3, 3]} intensity={0.5} color="#990000" />
-      <spotLight position={[0, 10, 0]} angle={0.3} penumbra={1} intensity={0.8} color="#e50914" />
+      <ambientLight intensity={0.3} />
+      <pointLight position={[0, 5, 5]} intensity={1.5} color="#e50914" />
+      <pointLight position={[-5, -3, 3]} intensity={0.8} color="#ff4444" />
+      <pointLight position={[5, -3, 3]} intensity={0.8} color="#cc0000" />
+      <directionalLight position={[0, 3, 5]} intensity={0.4} color="#ffffff" />
 
-      <Stars radius={20} depth={50} count={1000} factor={3} saturation={0} fade speed={1} />
-      <Particles count={300} />
+      <Stars radius={15} depth={20} count={200} factor={2} saturation={0} fade speed={0.5} />
+      <Particles count={50} />
       <Portal />
-      <StrangerTitle />
+      <SceneTitle />
 
-      {projectItems.map((item, idx) => (
+      {projectItems.slice(0, 6).map((item, idx) => (
         <ProjectCard3D
           key={item.id}
           item={item}
-          position={positions[idx % positions.length]}
+          index={idx}
+          position={positions[idx]}
           onClick={() => onSelectProject(item)}
         />
       ))}
 
-      {/* Ground fog effect */}
+      {/* Ground plane */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -4, 0]}>
-        <planeGeometry args={[50, 50]} />
-        <meshStandardMaterial color="#0a0000" transparent opacity={0.8} />
+        <planeGeometry args={[40, 40]} />
+        <meshBasicMaterial color="#080008" />
       </mesh>
+
+      <OrbitControls
+        enableZoom={false}
+        enablePan={false}
+        maxPolarAngle={Math.PI / 1.8}
+        minPolarAngle={Math.PI / 4}
+        autoRotate
+        autoRotateSpeed={0.3}
+      />
     </>
   );
 };
+
+// Fallback component shown while 3D loads
+const LoadingFallback = () => (
+  <div className="absolute inset-0 flex items-center justify-center bg-[#0a0008]">
+    <div className="text-center">
+      <div className="w-12 h-12 border-2 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+      <p className="text-primary font-display text-lg tracking-widest">ENTERING THE UPSIDE DOWN...</p>
+    </div>
+  </div>
+);
 
 const StrangerThings3D = () => {
   const [active, setActive] = useState(false);
@@ -250,12 +277,21 @@ const StrangerThings3D = () => {
             <X className="w-5 h-5 text-foreground" />
           </button>
 
-          <Canvas
-            camera={{ position: [0, 1, 8], fov: 60 }}
-            style={{ background: "#0a0000" }}
-          >
-            <Scene onSelectProject={setSelectedProject} />
-          </Canvas>
+          <Suspense fallback={<LoadingFallback />}>
+            <Canvas
+              camera={{ position: [0, 1, 8], fov: 55 }}
+              style={{ background: "#0a0008" }}
+              gl={{ antialias: true, powerPreference: "default", failIfMajorPerformanceCaveat: false }}
+              dpr={[1, 1.5]}
+              onCreated={({ gl }) => {
+                gl.getContext().canvas.addEventListener("webglcontextlost", (e) => {
+                  e.preventDefault();
+                });
+              }}
+            >
+              <Scene onSelectProject={setSelectedProject} />
+            </Canvas>
+          </Suspense>
 
           {/* Project detail overlay */}
           <AnimatePresence>
