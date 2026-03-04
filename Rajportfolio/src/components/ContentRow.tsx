@@ -9,6 +9,23 @@ import project4 from "@/assets/project-4.jpg";
 import project5 from "@/assets/project-5.jpg";
 import project6 from "@/assets/project-6.jpg";
 
+import aerolensImage from "@/assets/images/aerolens.png";
+import emptycupsImage from "@/assets/images/emptycups.png";
+import felecityImage from "@/assets/images/felecity.png";
+import gignutImage from "@/assets/images/gignut.png";
+import gleanImage from "@/assets/images/glean.png";
+import learncraftImage from "@/assets/images/learncraft.png";
+import lifesyncImage from "@/assets/images/lifesync.png";
+import ovoImage from "@/assets/images/ovo.png";
+import packmateImage from "@/assets/images/packmate.png";
+import sanguinesagesImage from "@/assets/images/sanguinesages.png";
+import sportsorcaImage from "@/assets/images/sportsorca.png";
+import staticportfolioImage from "@/assets/images/staticportfolio.png";
+import sudoqImage from "@/assets/images/sudoq.png";
+import tindogImage from "@/assets/images/tindog.png";
+import waste2worthImage from "@/assets/images/waste2worth.png";
+import watchdogImage from "@/assets/images/watchdog.png";
+
 export interface ContentItem {
   id: number;
   title: string;
@@ -19,6 +36,7 @@ export interface ContentItem {
   longDescription: string;
   year: string;
   category: string;
+  url?: string;
 }
 
 const DetailModal = ({ item, onClose }: { item: ContentItem; onClose: () => void }) => (
@@ -57,7 +75,10 @@ const DetailModal = ({ item, onClose }: { item: ContentItem; onClose: () => void
               {item.title}
             </h3>
             <div className="flex gap-3">
-              <button className="flex items-center gap-2 bg-foreground text-background px-6 py-2 rounded-sm font-semibold text-sm hover:bg-foreground/80 transition-colors">
+              <button
+                onClick={() => { if (item.url) window.open(item.url, '_blank'); }}
+                className="flex items-center gap-2 bg-foreground text-background px-6 py-2 rounded-sm font-semibold text-sm hover:bg-foreground/80 transition-colors"
+              >
                 <Play className="w-4 h-4 fill-current" />
                 View
               </button>
@@ -160,7 +181,13 @@ const ContentRow = ({
                       className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent flex flex-col justify-end p-3"
                     >
                       <div className="flex gap-2 mb-2">
-                        <button className="w-7 h-7 rounded-full bg-foreground flex items-center justify-center">
+                        <button
+                          className="w-7 h-7 rounded-full bg-foreground flex items-center justify-center hover:scale-110 transition-transform"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            if (item.url) window.open(item.url, '_blank');
+                          }}
+                        >
                           <Play className="w-3.5 h-3.5 text-background fill-current" />
                         </button>
                         <button className="w-7 h-7 rounded-full border border-muted-foreground flex items-center justify-center hover:border-foreground transition-colors">
@@ -205,12 +232,22 @@ const ContentRow = ({
 };
 
 export const projectItems: ContentItem[] = [
-  { id: 1, title: "E-Commerce Platform", image: project1, match: "98% Match", tags: ["React", "Node.js", "MongoDB", "Stripe", "Redis"], description: "Full-stack e-commerce solution", longDescription: "A comprehensive e-commerce platform built from the ground up with React and Node.js. Features include real-time inventory management, payment processing with Stripe, user authentication, product recommendations powered by ML, and an admin dashboard for managing orders, customers, and analytics. The platform handles 10,000+ daily active users with sub-200ms response times.", year: "2024", category: "Web App" },
-  { id: 2, title: "Social Media App", image: project2, match: "95% Match", tags: ["React Native", "Firebase", "TypeScript", "Algolia"], description: "Cross-platform social app", longDescription: "A cross-platform social media application built with React Native and Firebase. Features real-time messaging, story sharing, algorithmic feed, push notifications, and media uploads. The app supports both iOS and Android with a shared codebase, achieving 4.8 star rating on both app stores with 50,000+ downloads.", year: "2023", category: "Mobile App" },
-  { id: 3, title: "AI Analytics Dashboard", image: project3, match: "97% Match", tags: ["Python", "TensorFlow", "D3.js", "FastAPI", "PostgreSQL"], description: "ML-powered analytics", longDescription: "An enterprise-grade analytics dashboard that leverages machine learning to provide predictive insights. Built with a Python/FastAPI backend and D3.js visualizations. Features automated anomaly detection, natural language querying of data, customizable dashboards, and scheduled reporting. Processing millions of data points daily for Fortune 500 clients.", year: "2024", category: "Data Science" },
-  { id: 4, title: "Real-time Chat App", image: project4, match: "92% Match", tags: ["Socket.io", "Express", "Redis", "React", "Docker"], description: "Scalable messaging platform", longDescription: "A scalable real-time messaging platform supporting 1-on-1 and group conversations, file sharing, voice notes, and end-to-end encryption. Built on a microservices architecture with Socket.io for real-time communication and Redis for message queuing. Supports 100,000+ concurrent connections with horizontal scaling.", year: "2023", category: "Web App" },
-  { id: 5, title: "Music Streaming Service", image: project5, match: "94% Match", tags: ["Next.js", "AWS", "GraphQL", "Elasticsearch", "CDN"], description: "Spotify-like streaming", longDescription: "A full-featured music streaming platform with intelligent playlist generation, social sharing features, and artist analytics. Built with Next.js for the frontend, AWS for scalable media delivery, and Elasticsearch for lightning-fast search. Features lossless audio streaming, offline mode, and collaborative playlists.", year: "2022", category: "Web App" },
-  { id: 6, title: "Project Management Tool", image: project6, match: "96% Match", tags: ["Vue.js", "Supabase", "Tailwind", "TypeScript"], description: "Kanban-style project manager", longDescription: "A modern project management tool inspired by Notion and Linear. Features Kanban boards, Gantt charts, time tracking, team collaboration, and automated workflows. Built with Vue.js and Supabase for real-time data sync across all connected clients. Includes AI-powered task prioritization and sprint planning assistance.", year: "2024", category: "SaaS" },
+  { id: 1, title: "Static Portfolio", image: staticportfolioImage, match: "100% Match", tags: ["HTML", "CSS", "JavaScript"], description: "Simple portfolio website in HTML, CSS, JavaScript", longDescription: "A simple portfolio website built using HTML, CSS, and JavaScript. Showcases static web development skills.", year: "2024", category: "Portfolio", url: "https://rajwardhan-b.github.io/rajportfoliostatic/" },
+  { id: 2, title: "Gignut", image: gignutImage, match: "99% Match", tags: ["Web", "Fullstack"], description: "Placeholder description", longDescription: "Placeholder description for Gignut.", year: "2024", category: "Web App", url: "https://gignut.com" },
+  { id: 3, title: "Watchdog", image: watchdogImage, match: "98% Match", tags: ["Web App"], description: "Placeholder description", longDescription: "Placeholder description for Watchdog.", year: "2024", category: "Web App", url: "https://watchdog-6s7x.onrender.com/" },
+  { id: 4, title: "Packmate", image: packmateImage, match: "95% Match", tags: ["Streamlit"], description: "Placeholder description", longDescription: "Placeholder description for Packmate.", year: "2024", category: "Web App", url: "https://packmate-nqjjl4rmhwypmuy8tmdhid.streamlit.app/" },
+  { id: 5, title: "LifeSync", image: lifesyncImage, match: "96% Match", tags: ["Web App"], description: "Placeholder description", longDescription: "Placeholder description for LifeSync.", year: "2024", category: "Web App", url: "https://life-sync-eta.vercel.app/" },
+  { id: 6, title: "Waste2Worth", image: waste2worthImage, match: "97% Match", tags: ["Web App"], description: "Placeholder description", longDescription: "Placeholder description for Waste2Worth.", year: "2024", category: "Web App", url: "https://github.com/RAJWARDHAN-B/donateNGO" },
+  { id: 7, title: "LearnCraft", image: learncraftImage, match: "99% Match", tags: ["Web App"], description: "Placeholder description", longDescription: "Placeholder description for LearnCraft.", year: "2024", category: "Web App", url: "https://learn-craft.vercel.app/" },
+  { id: 8, title: "TinDog", image: tindogImage, match: "95% Match", tags: ["Web App"], description: "Placeholder description", longDescription: "Placeholder description for TinDog.", year: "2024", category: "Web App", url: "https://tindog-website-zeta.vercel.app/" },
+  { id: 9, title: "Glean", image: gleanImage, match: "94% Match", tags: ["Web App"], description: "Placeholder description", longDescription: "Placeholder description for Glean.", year: "2024", category: "Web App", url: "https://glean-nu.vercel.app/home" },
+  { id: 10, title: "SanguineSages", image: sanguinesagesImage, match: "98% Match", tags: ["Web App"], description: "Placeholder description", longDescription: "Placeholder description for SanguineSages.", year: "2024", category: "Web App", url: "https://sanguinesages.vercel.app/" },
+  { id: 11, title: "Felecity", image: felecityImage, match: "96% Match", tags: ["Web App"], description: "Placeholder description", longDescription: "Placeholder description for Felecity.", year: "2024", category: "Web App", url: "https://felecity-frontend.vercel.app/" },
+  { id: 12, title: "SudoQ", image: sudoqImage, match: "99% Match", tags: ["Web App"], description: "Placeholder description", longDescription: "Placeholder description for SudoQ.", year: "2024", category: "Web App", url: "https://cs-50-p-finalproject.vercel.app/" },
+  { id: 13, title: "SportsOrca", image: sportsorcaImage, match: "94% Match", tags: ["Web App"], description: "Placeholder description", longDescription: "Placeholder description for SportsOrca.", year: "2024", category: "Web App", url: "https://sports-orca-mu.vercel.app/" },
+  { id: 14, title: "EmptyCups", image: emptycupsImage, match: "95% Match", tags: ["Web App"], description: "Placeholder description", longDescription: "Placeholder description for EmptyCups.", year: "2024", category: "Web App", url: "https://empty-cups-inter-task.vercel.app/" },
+  { id: 15, title: "AeroLens", image: aerolensImage, match: "97% Match", tags: ["Web App"], description: "Placeholder description", longDescription: "Placeholder description for AeroLens.", year: "2024", category: "Web App", url: "https://aerolens.streamlit.app/" },
+  { id: 16, title: "OVO", image: ovoImage, match: "93% Match", tags: ["Web App"], description: "Placeholder description", longDescription: "Placeholder description for OVO.", year: "2024", category: "Web App", url: "https://ovoeval.streamlit.app/" },
 ];
 
 export const experienceItems: ContentItem[] = [
