@@ -1,6 +1,6 @@
 import { useRef, useMemo, useState, useEffect, Suspense } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Text, Float, Stars, OrbitControls } from "@react-three/drei";
+import { Text, Float, Stars, OrbitControls, useGLTF, useProgress } from "@react-three/drei";
 import { motion, AnimatePresence } from "framer-motion";
 import * as THREE from "three";
 import { projectItems, type ContentItem } from "./ContentRow";
@@ -148,6 +148,24 @@ const ProjectCard3D = ({
   );
 };
 
+
+// Central 3D Model loaded from GLB
+const CentralModel = () => {
+  // Use a generic path for the model. 
+  // The user should place their file in public/models/model.glb
+  const { scene } = useGLTF("/models/dead_by_daylight_-_the_first.glb");
+
+  return (
+    <primitive
+      object={scene}
+      scale={2.5}
+      position={[0, -3, -2]}
+      rotation={[0, Math.PI / 4, 0]}
+    />
+  );
+};
+
+
 // Scene title
 const SceneTitle = () => (
   <group position={[0, 4, -4]}>
@@ -192,6 +210,7 @@ const Scene = ({ onSelectProject }: { onSelectProject: (item: ContentItem) => vo
       <Stars radius={15} depth={20} count={200} factor={2} saturation={0} fade speed={0.5} />
       <Particles count={50} />
       <Portal />
+      <CentralModel />
       <SceneTitle />
 
       {projectItems.slice(0, 6).map((item, idx) => (
@@ -223,14 +242,26 @@ const Scene = ({ onSelectProject }: { onSelectProject: (item: ContentItem) => vo
 };
 
 // Fallback component shown while 3D loads
-const LoadingFallback = () => (
-  <div className="absolute inset-0 flex items-center justify-center bg-[#0a0008]">
-    <div className="text-center">
-      <div className="w-12 h-12 border-2 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-      <p className="text-primary font-display text-lg tracking-widest">ENTERING THE UPSIDE DOWN...</p>
+const LoadingFallback = () => {
+  const { progress } = useProgress();
+  return (
+    <div className="absolute inset-0 flex items-center justify-center bg-[#0a0008] z-50">
+      <div className="text-center w-64">
+        <div className="w-full bg-primary/20 h-1 mb-4 rounded-full overflow-hidden">
+          <motion.div
+            className="bg-primary h-full"
+            initial={{ width: 0 }}
+            animate={{ width: `${progress}%` }}
+            transition={{ duration: 0.5 }}
+          />
+        </div>
+        <p className="text-primary font-display text-lg tracking-widest animate-pulse">
+          {progress < 100 ? `LOADING... ${Math.round(progress)}%` : "ENTERING THE UPSIDE DOWN..."}
+        </p>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 const StrangerThings3D = () => {
   const [active, setActive] = useState(false);
