@@ -14,9 +14,20 @@ import AboutSection from "@/components/AboutSection";
 import StrangerThings3D from "@/components/StrangerThings3D";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
+import SearchResults from "@/components/SearchResults";
 
 const Index = () => {
   const [introComplete, setIntroComplete] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const allItems = [
+    ...projectItems,
+    ...experienceItems,
+    ...techStackItems,
+    ...languageItems,
+    ...skillItems,
+    ...certificationItems,
+  ];
 
   const handleIntroComplete = useCallback(() => {
     setIntroComplete(true);
@@ -28,39 +39,48 @@ const Index = () => {
 
       {introComplete && (
         <>
-          <NetflixNav />
-          <HeroSection />
+          <NetflixNav onSearch={(query) => setSearchQuery(query)} />
 
-          <div className="-mt-16 relative z-10">
-            <section id="projects">
-              <ContentRow title="Featured Projects" items={projectItems} />
-            </section>
+          {searchQuery ? (
+            <div className="relative z-10">
+              <SearchResults query={searchQuery} items={allItems} />
+            </div>
+          ) : (
+            <>
+              <HeroSection />
 
-            <section id="experience">
-              <ContentRow title="Experience & Education" items={experienceItems} />
-            </section>
+              <div className="-mt-16 relative z-10">
+                <section id="projects">
+                  <ContentRow title="Featured Projects" items={projectItems} />
+                </section>
 
-            <section id="techstack">
-              <ContentRow title="Tech Stack" items={techStackItems} />
-            </section>
+                <section id="experience">
+                  <ContentRow title="Experience & Education" items={experienceItems} />
+                </section>
 
-            <section id="languages">
-              <ContentRow title="Languages" items={languageItems} />
-            </section>
+                <section id="techstack">
+                  <ContentRow title="Tech Stack" items={techStackItems} />
+                </section>
 
-            <section id="skills">
-              <ContentRow title="Skills & Technologies" items={skillItems} />
-            </section>
+                <section id="languages">
+                  <ContentRow title="Languages" items={languageItems} />
+                </section>
 
-            <section id="certifications">
-              <ContentRow title="Certifications" items={certificationItems} />
-            </section>
+                <section id="skills">
+                  <ContentRow title="Skills & Technologies" items={skillItems} />
+                </section>
 
-            <AboutSection />
-            <StrangerThings3D />
-            <ContactSection />
-            <Footer />
-          </div>
+                <section id="certifications">
+                  <ContentRow title="Certifications" items={certificationItems} />
+                </section>
+
+                <AboutSection />
+                <StrangerThings3D />
+                <ContactSection />
+                <Footer />
+              </div>
+            </>
+          )}
         </>
       )}
     </div>

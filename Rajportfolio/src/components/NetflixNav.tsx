@@ -1,11 +1,14 @@
-import { useState, useEffect } from "react";
-import { Search, Bell } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { Search, Bell, X } from "lucide-react";
 
 const navItems = ["Home", "About", "Projects", "Experience", "TechStack", "Languages", "Certifications", "Contact"];
 
-const NetflixNav = () => {
+const NetflixNav = ({ onSearch }: { onSearch?: (query: string) => void }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const searchInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -50,7 +53,54 @@ const NetflixNav = () => {
         </div>
 
         <div className="flex items-center gap-4">
-          <Search className="w-5 h-5 text-foreground cursor-pointer hover:text-muted-foreground transition-colors" />
+          {/* Search Bar */}
+          <div
+            className={`flex items-center transition-all duration-300 ${searchOpen ? "bg-black/80 border border-white px-2 py-1" : ""
+              }`}
+          >
+            <Search
+              className="w-5 h-5 text-foreground cursor-pointer hover:text-muted-foreground transition-colors"
+              onClick={() => {
+                setSearchOpen(!searchOpen);
+                if (!searchOpen) {
+                  setTimeout(() => searchInputRef.current?.focus(), 100);
+                } else if (!searchQuery) {
+                  // If closing and empty query, close it and clear
+                  setSearchQuery("");
+                  onSearch?.("");
+                }
+              }}
+            />
+            {searchOpen && (
+              <input
+                ref={searchInputRef}
+                type="text"
+                value={searchQuery}
+                onChange={(e) => {
+                  setSearchQuery(e.target.value);
+                  onSearch?.(e.target.value);
+                }}
+                placeholder="Titles, skills, categories"
+                className="bg-transparent text-white focus:outline-none text-sm ml-2 w-32 md:w-48 transition-all"
+                onBlur={() => {
+                  if (!searchQuery) {
+                    setSearchOpen(false);
+                  }
+                }}
+              />
+            )}
+            {searchOpen && searchQuery && (
+              <X
+                className="w-4 h-4 text-muted-foreground cursor-pointer ml-1 hover:text-white"
+                onClick={() => {
+                  setSearchQuery("");
+                  onSearch?.("");
+                  searchInputRef.current?.focus();
+                }}
+              />
+            )}
+          </div>
+
           <Bell className="w-5 h-5 text-foreground cursor-pointer hover:text-muted-foreground transition-colors" />
           <div className="w-8 h-8 rounded overflow-hidden flex items-center justify-center cursor-pointer">
             <img

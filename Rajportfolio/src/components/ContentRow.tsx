@@ -39,7 +39,7 @@ export interface ContentItem {
   url?: string;
 }
 
-const DetailModal = ({ item, onClose }: { item: ContentItem; onClose: () => void }) => (
+export const DetailModal = ({ item, onClose }: { item: ContentItem; onClose: () => void }) => (
   <AnimatePresence>
     <motion.div
       className="fixed inset-0 z-[150] flex items-start justify-center pt-8 md:pt-16 px-4 overflow-y-auto"
