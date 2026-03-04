@@ -151,18 +151,13 @@ const ProjectCard3D = ({
 
 // Central 3D Model loaded from GLB
 const CentralModel = () => {
-  // Use a generic path for the model. 
-  // The user should place their file in public/models/model.glb
-  const { scene } = useGLTF("/models/dead_by_daylight_-_the_first.glb");
+  // NOTE: Temporarily disabled loading this 127MB model.
+  // It was causing a "Unexpected token 'v' ... is not valid JSON" parse error
+  // or a "THREE.WebGLRenderer: Context Lost" VRAM crash.
 
-  return (
-    <primitive
-      object={scene}
-      scale={2.5}
-      position={[0, -3, -2]}
-      rotation={[0, Math.PI / 4, 0]}
-    />
-  );
+  // const { scene } = useGLTF("/models/dead_by_daylight_-_the_first.glb");
+
+  return null;
 };
 
 

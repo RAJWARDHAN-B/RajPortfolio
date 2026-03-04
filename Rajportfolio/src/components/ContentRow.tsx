@@ -159,7 +159,7 @@ const ContentRow = ({
             {items.map((item, idx) => (
               <motion.div
                 key={item.id}
-                className="flex-shrink-0 w-[45%] sm:w-[30%] md:w-[23%] lg:w-[16%] relative group/card"
+                className="flex-shrink-0 w-[85%] sm:w-[45%] md:w-[30%] lg:w-[22%] relative group/card"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.05, duration: 0.4 }}
@@ -167,7 +167,7 @@ const ContentRow = ({
                 onMouseEnter={() => setHoveredId(item.id)}
                 onMouseLeave={() => setHoveredId(null)}
               >
-                <div className="netflix-card aspect-[2/3]" onClick={() => setSelectedItem(item)}>
+                <div className="netflix-card aspect-video bg-card/50" onClick={() => setSelectedItem(item)}>
                   <img
                     src={item.image}
                     alt={item.title}
