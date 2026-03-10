@@ -25,6 +25,7 @@ import sudoqImage from "@/assets/images/sudoq.png";
 import tindogImage from "@/assets/images/tindog.png";
 import waste2worthImage from "@/assets/images/waste2worth.png";
 import watchdogImage from "@/assets/images/watchdog.png";
+import comingSoonImage from "@/assets/comingsoon.jpg";
 
 export interface ContentItem {
   id: number;
@@ -248,15 +249,65 @@ export const projectItems: ContentItem[] = [
   { id: 14, title: "EmptyCups", image: emptycupsImage, match: "95% Match", tags: ["Web App"], description: "Placeholder description", longDescription: "Placeholder description for EmptyCups.", year: "2024", category: "Web App", url: "https://empty-cups-inter-task.vercel.app/" },
   { id: 15, title: "AeroLens", image: aerolensImage, match: "97% Match", tags: ["Web App"], description: "Placeholder description", longDescription: "Placeholder description for AeroLens.", year: "2024", category: "Web App", url: "https://aerolens.streamlit.app/" },
   { id: 16, title: "OVO", image: ovoImage, match: "93% Match", tags: ["Web App"], description: "Placeholder description", longDescription: "Placeholder description for OVO.", year: "2024", category: "Web App", url: "https://ovoeval.streamlit.app/" },
+  { id: 17, title: "Verdantia", image: comingSoonImage, match: "Coming Soon", tags: ["Project", "Upcoming"], description: "Green Tech Platform", longDescription: "Verdantia is an upcoming green technology platform focused on sustainable living and environmental awareness. Stay tuned for updates!", year: "2026", category: "Web App" },
 ];
 
 export const experienceItems: ContentItem[] = [
-  { id: 7, title: "Senior Dev @ TechCorp", image: project1, match: "2022 - Present", tags: ["Lead", "Full-Stack", "Mentor", "Architecture"], description: "Leading a team of 8", longDescription: "Leading a team of 8 engineers building the next generation of TechCorp's core platform. Responsible for architectural decisions, code reviews, sprint planning, and mentoring junior developers. Introduced CI/CD pipelines that reduced deployment time by 70% and implemented microservices migration that improved system reliability to 99.99% uptime.", year: "2022 - Present", category: "Full-Time" },
-  { id: 8, title: "Dev @ StartupXYZ", image: project3, match: "2020 - 2022", tags: ["React", "AWS", "Agile", "TypeScript"], description: "Built core platform", longDescription: "Employee #5 at a fast-growing startup. Built the core SaaS platform from scratch using React and AWS serverless architecture. Grew the platform from 0 to 10,000 paying customers. Implemented real-time collaboration features, billing system integration, and SSO authentication for enterprise clients.", year: "2020 - 2022", category: "Full-Time" },
-  { id: 9, title: "Junior Dev @ WebAgency", image: project5, match: "2018 - 2020", tags: ["Frontend", "UI/UX", "Design", "WordPress"], description: "Client-facing projects", longDescription: "Worked on 30+ client projects ranging from small business websites to complex web applications. Specialized in responsive design, animation, and performance optimization. Key achievements include reducing page load times by 60% across the agency's portfolio and establishing the design system used by the entire team.", year: "2018 - 2020", category: "Full-Time" },
-  { id: 10, title: "Intern @ BigTech Inc", image: project2, match: "2017 - 2018", tags: ["Python", "Data", "ML", "Spark"], description: "Data pipeline automation", longDescription: "Interned at a major tech company's data engineering team. Built automated data pipelines using Python and Apache Spark that processed 50TB of data daily. Developed ML models for content recommendation that improved user engagement by 15%. Received a return offer and was recognized as top intern in the cohort.", year: "2017 - 2018", category: "Internship" },
-  { id: 11, title: "Freelance Developer", image: project4, match: "2016 - 2017", tags: ["WordPress", "PHP", "CSS", "JavaScript"], description: "20+ client websites", longDescription: "Built and maintained 20+ websites for small businesses and startups. Handled everything from client communication and requirements gathering to design, development, and deployment. Specialized in WordPress custom themes, e-commerce setups, and SEO optimization. Maintained a 100% client satisfaction rate.", year: "2016 - 2017", category: "Freelance" },
-  { id: 12, title: "CS Degree @ University", image: project6, match: "2014 - 2018", tags: ["Algorithms", "OS", "Networks", "Databases"], description: "BSc Computer Science", longDescription: "Bachelor of Science in Computer Science with a focus on software engineering and artificial intelligence. Graduated with honors (GPA 3.8/4.0). Capstone project on distributed systems won the department's Best Project Award. Active member of the coding club and hackathon team, winning 3 university-level competitions.", year: "2014 - 2018", category: "Education" },
+  { 
+    id: 6, 
+    title: "Research Intern @ IIT Kharagpur", 
+    image: comingSoonImage, 
+    match: "Coming Soon", 
+    tags: ["Research", "Upcoming"], 
+    description: "Acceptance Received", 
+    longDescription: "Incoming Research Internship at Indian Institute of Technology Kharagpur. Focus and project details to be updated shortly.", 
+    year: "2026", 
+    category: "Upcoming" 
+  },
+  { 
+    id: 7, 
+    title: "CV Research Intern @ IIT Mandi", 
+    image: project2, 
+    match: "Nov 2025 – Mar 2026", 
+    tags: ["Computer Vision", "Deep Learning", "Research", "Python"], 
+    description: "Solar Cell Defect Detection", 
+    longDescription: "Conducting research on Solar Cell Defect Detection and classification using advanced Computer Vision techniques. Developed deep learning models to automate the identification of micro-cracks and anomalies in photovoltaic cells. Processed large-scale datasets to improve model accuracy and robustness for real-world industrial inspection.", 
+    year: "2025 - 2026", 
+    category: "Internship" 
+  },
+  { 
+    id: 8, 
+    title: "Software Dev Intern @ UNITECTURE", 
+    image: project1, 
+    match: "Dec 2025 – Feb 2026", 
+    tags: ["Full Stack", "HRMS", "Workflow Automation", "React"], 
+    description: "Internal HRMS Development", 
+    longDescription: "Engineered an internal HRMS to streamline organizational workflows. Developed modules for employee data management, attendance tracking, leave processing and Task Management. Focused on creating a secure, user-centric interface to improve internal administrative efficiency.", 
+    year: "2025 - 2026", 
+    category: "Internship" 
+  },
+  { 
+    id: 9, 
+    title: "Full Stack Intern @ Unified Transformation", 
+    image: project3, 
+    match: "July 2025 – Feb 2026", 
+    tags: ["FastAPI", "B2B", "API Design", "Deployment"], 
+    description: "Developed gignut.com", 
+    longDescription: "Developed gignut.com, a production-grade B2B web platform, handling end-to-end development and deployment. Designed and implemented scalable backend services using FastAPI to support core business workflows. Built secure and efficient REST APIs and integrated them with frontend components. Optimized API performance, database queries, and overall system responsiveness.", 
+    year: "2025 - 2026", 
+    category: "Internship" 
+  },
+  { 
+    id: 10, 
+    title: "Web Dev Intern @ Learncraft Engineering", 
+    image: project5, 
+    match: "May – June 2025", 
+    tags: ["React.js", "Clean Architecture", "REST API", "Frontend"], 
+    description: "Modular React Applications", 
+    longDescription: "Developed modular and responsive React.js applications with a focus on clean architecture and performance. Collaborated with backend services and integrated REST APIs for production-grade deployments.", 
+    year: "2025", 
+    category: "Internship" 
+  }
 ];
 
 export const skillItems: ContentItem[] = [
