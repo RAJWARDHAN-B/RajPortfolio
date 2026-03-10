@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Search, Bell, X } from "lucide-react";
 
-const navItems = ["Home", "About", "Projects", "Experience", "TechStack", "Languages", "Certifications", "Contact"];
+const navItems = ["Home", "About", "Projects", "Experience", "TechStack", "Languages", "Contact"];
 
 const NetflixNav = ({ onSearch }: { onSearch?: (query: string) => void }) => {
   const [scrolled, setScrolled] = useState(false);

@@ -40,6 +40,61 @@ export interface ContentItem {
   url?: string;
 }
 
+const LikeButton = ({ size = "md" }: { size?: "sm" | "md" }) => {
+  const [liked, setLiked] = useState(false);
+  const [showBurst, setShowBurst] = useState(false);
+
+  const handleClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setLiked(!liked);
+    if (!liked) {
+      setShowBurst(true);
+      setTimeout(() => setShowBurst(false), 800);
+    }
+  };
+
+  const buttonClass = size === "sm" 
+    ? "w-7 h-7 border" 
+    : "w-9 h-9 border-2";
+  
+  const iconSize = size === "sm" ? "w-3.5 h-3.5" : "w-5 h-5";
+
+  return (
+    <div className="relative inline-block">
+      <motion.button
+        onClick={handleClick}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        className={`${buttonClass} rounded-full border-muted-foreground flex items-center justify-center transition-colors ${
+          liked ? "bg-primary border-primary text-white" : "hover:border-foreground text-foreground"
+        }`}
+      >
+        <motion.div
+           animate={liked ? { scale: [1, 1.4, 1], rotate: [0, -15, 0] } : {}}
+           transition={{ duration: 0.3 }}
+        >
+          <ThumbsUp className={`${iconSize} ${liked ? "fill-current" : ""}`} />
+        </motion.div>
+      </motion.button>
+
+      <AnimatePresence>
+        {showBurst && (
+          <motion.div
+            initial={{ opacity: 0, y: 0, scale: 0.5 }}
+            animate={{ opacity: [0, 1, 0], y: -40, scale: 1.5 }}
+            exit={{ opacity: 0 }}
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+          >
+            <div className="text-primary">
+              <ThumbsUp className="w-8 h-8 fill-current blur-[1px]" />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
+
 export const DetailModal = ({ item, onClose }: { item: ContentItem; onClose: () => void }) => (
   <AnimatePresence>
     <motion.div
@@ -86,9 +141,7 @@ export const DetailModal = ({ item, onClose }: { item: ContentItem; onClose: () 
               <button className="w-9 h-9 rounded-full border-2 border-muted-foreground flex items-center justify-center hover:border-foreground transition-colors">
                 <Plus className="w-5 h-5 text-foreground" />
               </button>
-              <button className="w-9 h-9 rounded-full border-2 border-muted-foreground flex items-center justify-center hover:border-foreground transition-colors">
-                <ThumbsUp className="w-5 h-5 text-foreground" />
-              </button>
+              <LikeButton />
             </div>
           </div>
         </div>
@@ -194,9 +247,7 @@ const ContentRow = ({
                         <button className="w-7 h-7 rounded-full border border-muted-foreground flex items-center justify-center hover:border-foreground transition-colors">
                           <Plus className="w-3.5 h-3.5 text-foreground" />
                         </button>
-                        <button className="w-7 h-7 rounded-full border border-muted-foreground flex items-center justify-center hover:border-foreground transition-colors">
-                          <ThumbsUp className="w-3.5 h-3.5 text-foreground" />
-                        </button>
+                        <LikeButton size="sm" />
                         <button
                           className="w-7 h-7 rounded-full border border-muted-foreground flex items-center justify-center hover:border-foreground transition-colors ml-auto"
                           onClick={(e) => {
