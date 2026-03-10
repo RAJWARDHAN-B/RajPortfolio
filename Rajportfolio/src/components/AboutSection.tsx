@@ -18,16 +18,12 @@ const AboutSection = () => {
             THE STORY SO FAR
           </h3>
           <p className="text-muted-foreground leading-relaxed mb-4">
-            I'm a passionate full-stack developer who loves turning complex problems
-            into simple, beautiful, and intuitive solutions. With over 5 years of
-            experience in the tech industry, I've worked with startups and enterprise
-            companies alike.
+            Hello! I am a third-year IT Engineering student at Pune Institute of Computer Technology (PICT), Pune. I'm a passionate developer who loves turning complex problems into simple, beautiful, and intuitive solutions.
           </p>
           <p className="text-muted-foreground leading-relaxed">
-            When I'm not coding, you'll find me exploring new technologies,
-            contributing to open-source projects, or mentoring aspiring developers.
-            I believe in writing clean, maintainable code and creating experiences
-            that users love.
+            When I'm not studying or building projects, you'll find me exploring new technologies,
+            contributing to open-source, or participating in hackathons.
+            I believe in writing clean, maintainable code and building seamless digital experiences.
           </p>
         </motion.div>
 
@@ -39,10 +35,10 @@ const AboutSection = () => {
           className="grid grid-cols-2 gap-4"
         >
           {[
-            { icon: User, label: "Role", value: "Senior Full-Stack Developer" },
-            { icon: MapPin, label: "Location", value: "San Francisco, CA" },
-            { icon: Calendar, label: "Experience", value: "5+ Years" },
-            { icon: Award, label: "Projects", value: "50+ Completed" },
+            { icon: User, label: "Role", value: "IT Engineering Student" },
+            { icon: MapPin, label: "Location", value: "Pune, India" },
+            { icon: Calendar, label: "Experience", value: "3rd Year Student" },
+            { icon: Award, label: "College", value: "PICT Pune" },
           ].map(({ icon: Icon, label, value }, idx) => (
             <motion.div
               key={label}
