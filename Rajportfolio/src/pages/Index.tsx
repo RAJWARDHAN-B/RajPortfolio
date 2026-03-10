@@ -15,6 +15,7 @@ import StrangerThings3D from "@/components/StrangerThings3D";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import SearchResults from "@/components/SearchResults";
+import LanguageGraphic from "@/components/LanguageGraphic";
 
 const Index = () => {
   const [introComplete, setIntroComplete] = useState(false);
@@ -55,7 +56,7 @@ const Index = () => {
                 </section>
 
                 <section id="experience">
-                  <ContentRow title="Experience & Education" items={experienceItems} />
+                  <ContentRow title="Experience" items={experienceItems} />
                 </section>
 
                 <section id="techstack">
@@ -63,12 +64,13 @@ const Index = () => {
                 </section>
 
                 <section id="languages">
-                  <ContentRow title="Languages" items={languageItems} />
+                  <h2 className="netflix-section-title text-foreground">Languages</h2>
+                  <LanguageGraphic />
                 </section>
 
-                <section id="skills">
+                {/* <section id="skills">
                   <ContentRow title="Skills & Technologies" items={skillItems} />
-                </section>
+                </section> */}
 
                 <section id="certifications">
                   <ContentRow title="Certifications" items={certificationItems} />
