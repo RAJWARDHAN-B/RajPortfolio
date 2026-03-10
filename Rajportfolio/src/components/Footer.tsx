@@ -11,8 +11,8 @@ const Footer = () => {
       <div className="max-w-6xl">
         <p className="text-muted-foreground text-sm mb-6">
           Questions? Reach out at{" "}
-          <a href="mailto:rajwardhan@example.com" className="hover:underline">
-            john@example.com
+          <a href="mailto:rajwardhanpict@gmail.com" className="hover:underline">
+            rajwardhanpict@gmail.com
           </a>
         </p>
 

@@ -33,10 +33,9 @@ const ContactSection = () => {
 
           <div className="flex gap-4">
             {[
-              { icon: Github, href: "#" },
-              { icon: Linkedin, href: "#" },
-              { icon: Twitter, href: "#" },
-              { icon: Mail, href: "#" },
+              { icon: Github, href: "https://github.com/RAJWARDHAN-B" },
+              { icon: Linkedin, href: "https://linkedin.com/in/rajwardhan-bhandigare" },
+              { icon: Mail, href: "mailto:rajwardhanpict@gmail.com" },
             ].map(({ icon: Icon, href }, idx) => (
               <a
                 key={idx}

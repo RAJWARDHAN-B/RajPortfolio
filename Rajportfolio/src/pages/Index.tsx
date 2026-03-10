@@ -16,6 +16,7 @@ import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import SearchResults from "@/components/SearchResults";
 import LanguageGraphic from "@/components/LanguageGraphic";
+import TechStackGraphic from "@/components/TechStackGraphic";
 
 const Index = () => {
   const [introComplete, setIntroComplete] = useState(false);
@@ -60,7 +61,8 @@ const Index = () => {
                 </section>
 
                 <section id="techstack">
-                  <ContentRow title="Tech Stack" items={techStackItems} />
+                  <h2 className="netflix-section-title text-foreground">Expertise & Technologies</h2>
+                  <TechStackGraphic />
                 </section>
 
                 <section id="languages">
@@ -72,9 +74,9 @@ const Index = () => {
                   <ContentRow title="Skills & Technologies" items={skillItems} />
                 </section> */}
 
-                <section id="certifications">
+                {/* <section id="certifications">
                   <ContentRow title="Certifications" items={certificationItems} />
-                </section>
+                </section> */}
 
                 <AboutSection />
                 <StrangerThings3D />
