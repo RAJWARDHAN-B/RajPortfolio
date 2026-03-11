@@ -1,16 +1,34 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
-import { Send, Github, Linkedin, Twitter, Mail } from "lucide-react";
+import { Send, Github, Linkedin, Mail, CheckCircle2 } from "lucide-react";
+import { useForm, ValidationError } from '@formspree/react';
 
 const ContactSection = () => {
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [state, handleSubmit] = useForm("xnjgdbpe");
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Placeholder - no backend
-    alert("Thanks for reaching out! (This is a demo)");
-    setFormData({ name: "", email: "", message: "" });
-  };
+  if (state.succeeded) {
+    return (
+      <section id="contact" className="py-16 px-4 md:px-12">
+        <h2 className="netflix-section-title text-foreground mb-8">Contact Me</h2>
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="flex flex-col items-center justify-center p-12 bg-card border border-border rounded-lg text-center max-w-2xl mx-auto"
+        >
+          <CheckCircle2 className="w-16 h-16 text-primary mb-4" />
+          <h3 className="text-3xl font-display text-foreground mb-2">THANK YOU!</h3>
+          <p className="text-muted-foreground text-lg">
+            Your message has been sent successfully. I'll get back to you soon.
+          </p>
+          <button 
+            onClick={() => window.location.reload()}
+            className="mt-8 text-primary hover:underline font-semibold"
+          >
+            Send another message
+          </button>
+        </motion.div>
+      </section>
+    );
+  }
 
   return (
     <section id="contact" className="py-16 px-4 md:px-12">
@@ -56,36 +74,67 @@ const ContactSection = () => {
           viewport={{ once: true }}
           className="space-y-4"
         >
-          <input
-            type="text"
-            placeholder="Your Name"
-            value={formData.name}
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            className="w-full bg-card border border-border rounded-sm px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
-            required
-          />
-          <input
-            type="email"
-            placeholder="Your Email"
-            value={formData.email}
-            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-            className="w-full bg-card border border-border rounded-sm px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
-            required
-          />
-          <textarea
-            placeholder="Your Message"
-            value={formData.message}
-            onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-            rows={4}
-            className="w-full bg-card border border-border rounded-sm px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors resize-none"
-            required
-          />
+          <div>
+            <input
+              type="text"
+              name="name"
+              placeholder="Your Name"
+              className="w-full bg-card border border-border rounded-sm px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
+              required
+            />
+            <ValidationError 
+              prefix="Name" 
+              field="name"
+              errors={state.errors}
+              className="text-red-500 text-sm mt-1"
+            />
+          </div>
+          <div>
+            <input
+              type="email"
+              name="email"
+              placeholder="Your Email"
+              className="w-full bg-card border border-border rounded-sm px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
+              required
+            />
+            <ValidationError 
+              prefix="Email" 
+              field="email"
+              errors={state.errors}
+              className="text-red-500 text-sm mt-1"
+            />
+          </div>
+          <div>
+            <textarea
+              name="message"
+              placeholder="Your Message"
+              rows={4}
+              className="w-full bg-card border border-border rounded-sm px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors resize-none"
+              required
+            />
+            <ValidationError 
+              prefix="Message" 
+              field="message"
+              errors={state.errors}
+              className="text-red-500 text-sm mt-1"
+            />
+          </div>
           <button
             type="submit"
-            className="flex items-center gap-2 bg-primary text-primary-foreground px-8 py-3 rounded-sm font-semibold hover:bg-primary/90 transition-colors"
+            disabled={state.submitting}
+            className="flex items-center gap-2 bg-primary text-primary-foreground px-8 py-3 rounded-sm font-semibold hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            <Send className="w-4 h-4" />
-            Send Message
+            {state.submitting ? (
+              <span className="flex items-center gap-2">
+                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                Sending...
+              </span>
+            ) : (
+              <>
+                <Send className="w-4 h-4" />
+                Send Message
+              </>
+            )}
           </button>
         </motion.form>
       </div>
