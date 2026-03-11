@@ -320,7 +320,7 @@ export const projectItems: ContentItem[] = [
 
 export const experienceItems: ContentItem[] = [
   { 
-    id: 6, 
+    id: 18, 
     title: "Research Intern @ IIT Kharagpur", 
     image: comingSoonImage, 
     match: "Coming Soon", 
@@ -331,7 +331,7 @@ export const experienceItems: ContentItem[] = [
     category: "Upcoming" 
   },
   { 
-    id: 7, 
+    id: 19, 
     title: "CV Research Intern @ IIT Mandi", 
     image: project2, 
     match: "Nov 2025 – Mar 2026", 
@@ -342,7 +342,7 @@ export const experienceItems: ContentItem[] = [
     category: "Internship" 
   },
   { 
-    id: 8, 
+    id: 20, 
     title: "Software Dev Intern @ UNITECTURE", 
     image: project1, 
     match: "Dec 2025 – Feb 2026", 
@@ -353,7 +353,7 @@ export const experienceItems: ContentItem[] = [
     category: "Internship" 
   },
   { 
-    id: 9, 
+    id: 21, 
     title: "Full Stack Intern @ Unified Transformation", 
     image: project3, 
     match: "July 2025 – Feb 2026", 
@@ -364,7 +364,7 @@ export const experienceItems: ContentItem[] = [
     category: "Internship" 
   },
   { 
-    id: 10, 
+    id: 22, 
     title: "Web Dev Intern @ Learncraft Engineering", 
     image: project5, 
     match: "May – June 2025", 
@@ -377,30 +377,30 @@ export const experienceItems: ContentItem[] = [
 ];
 
 export const skillItems: ContentItem[] = [
-  { id: 13, title: "React & Next.js", image: project3, match: "Expert", tags: ["Hooks", "SSR", "RSC", "Redux", "Zustand"], description: "5+ years", longDescription: "Deep expertise in React ecosystem including Next.js, server components, state management with Redux and Zustand, performance optimization, and building design systems. Contributed to open-source React libraries and authored technical blog posts on advanced patterns.", year: "5+ years", category: "Frontend" },
-  { id: 14, title: "TypeScript", image: project1, match: "Expert", tags: ["Types", "Generics", "DX", "Zod"], description: "4+ years", longDescription: "Advanced TypeScript skills including complex generic types, utility types, discriminated unions, and type-safe API layers. Experience with Zod for runtime validation, tRPC for end-to-end type safety, and building type-safe design systems.", year: "4+ years", category: "Language" },
-  { id: 15, title: "Node.js & Express", image: project4, match: "Advanced", tags: ["REST", "GraphQL", "Auth", "Prisma"], description: "4+ years", longDescription: "Extensive experience building RESTful and GraphQL APIs with Node.js. Proficient with Express, Fastify, and NestJS frameworks. Experience with database ORMs (Prisma, Sequelize), authentication (JWT, OAuth), and real-time communication (WebSockets, Socket.io).", year: "4+ years", category: "Backend" },
-  { id: 16, title: "Cloud & DevOps", image: project2, match: "Advanced", tags: ["AWS", "Docker", "CI/CD", "Terraform"], description: "3+ years", longDescription: "Hands-on experience with AWS (Lambda, EC2, S3, RDS, CloudFront), containerization with Docker and Kubernetes, CI/CD pipelines with GitHub Actions, and infrastructure as code with Terraform. Certified AWS Solutions Architect Associate.", year: "3+ years", category: "Infrastructure" },
-  { id: 17, title: "Python & ML", image: project5, match: "Intermediate", tags: ["TensorFlow", "Pandas", "Scikit", "FastAPI"], description: "2+ years", longDescription: "Experience with Python for data science and machine learning. Built predictive models using TensorFlow and scikit-learn, data pipelines with Pandas, and ML-serving APIs with FastAPI. Familiar with NLP, computer vision, and recommendation systems.", year: "2+ years", category: "Data Science" },
-  { id: 18, title: "UI/UX Design", image: project6, match: "Advanced", tags: ["Figma", "Motion", "A11y", "Design Systems"], description: "3+ years", longDescription: "Strong eye for design with proficiency in Figma, prototyping, and design systems. Experience with motion design using Framer Motion and CSS animations. Advocate for accessibility (WCAG 2.1) and inclusive design practices.", year: "3+ years", category: "Design" },
+  { id: 23, title: "React & Next.js", image: project3, match: "Expert", tags: ["Hooks", "SSR", "RSC", "Redux", "Zustand"], description: "5+ years", longDescription: "Deep expertise in React ecosystem including Next.js, server components, state management with Redux and Zustand, performance optimization, and building design systems. Contributed to open-source React libraries and authored technical blog posts on advanced patterns.", year: "5+ years", category: "Frontend" },
+  { id: 24, title: "TypeScript", image: project1, match: "Expert", tags: ["Types", "Generics", "DX", "Zod"], description: "4+ years", longDescription: "Advanced TypeScript skills including complex generic types, utility types, discriminated unions, and type-safe API layers. Experience with Zod for runtime validation, tRPC for end-to-end type safety, and building type-safe design systems.", year: "4+ years", category: "Language" },
+  { id: 25, title: "Node.js & Express", image: project4, match: "Advanced", tags: ["REST", "GraphQL", "Auth", "Prisma"], description: "4+ years", longDescription: "Extensive experience building RESTful and GraphQL APIs with Node.js. Proficient with Express, Fastify, and NestJS frameworks. Experience with database ORMs (Prisma, Sequelize), authentication (JWT, OAuth), and real-time communication (WebSockets, Socket.io).", year: "4+ years", category: "Backend" },
+  { id: 26, title: "Cloud & DevOps", image: project2, match: "Advanced", tags: ["AWS", "Docker", "CI/CD", "Terraform"], description: "3+ years", longDescription: "Hands-on experience with AWS (Lambda, EC2, S3, RDS, CloudFront), containerization with Docker and Kubernetes, CI/CD pipelines with GitHub Actions, and infrastructure as code with Terraform. Certified AWS Solutions Architect Associate.", year: "3+ years", category: "Infrastructure" },
+  { id: 27, title: "Python & ML", image: project5, match: "Intermediate", tags: ["TensorFlow", "Pandas", "Scikit", "FastAPI"], description: "2+ years", longDescription: "Experience with Python for data science and machine learning. Built predictive models using TensorFlow and scikit-learn, data pipelines with Pandas, and ML-serving APIs with FastAPI. Familiar with NLP, computer vision, and recommendation systems.", year: "2+ years", category: "Data Science" },
+  { id: 28, title: "UI/UX Design", image: project6, match: "Advanced", tags: ["Figma", "Motion", "A11y", "Design Systems"], description: "3+ years", longDescription: "Strong eye for design with proficiency in Figma, prototyping, and design systems. Experience with motion design using Framer Motion and CSS animations. Advocate for accessibility (WCAG 2.1) and inclusive design practices.", year: "3+ years", category: "Design" },
 ];
 
 export const techStackItems: ContentItem[] = [
-  { id: 19, title: "Frontend Stack", image: project1, match: "Primary", tags: ["React", "Next.js", "Tailwind", "Framer Motion"], description: "Modern UI development", longDescription: "Comprehensive frontend development using the latest React features and Tailwind CSS for rapid, responsive design.", year: "2026", category: "Frontend" },
-  { id: 20, title: "Backend Stack", image: project4, match: "Primary", tags: ["Node.js", "NestJS", "PostgreSQL", "Redis"], description: "Scalable server logic", longDescription: "Building robust backend services with microservices architecture and efficient data management.", year: "2026", category: "Backend" },
-  { id: 21, title: "Tools & DevOps", image: project2, match: "Primary", tags: ["Docker", "Kubernetes", "GitHub Actions", "Terraform"], description: "Infrastructure & Automation", longDescription: "Streamlining deployment pipelines and managing cloud infrastructure for high-availability applications.", year: "2026", category: "DevOps" },
+  { id: 29, title: "Frontend Stack", image: project1, match: "Primary", tags: ["React", "Next.js", "Tailwind", "Framer Motion"], description: "Modern UI development", longDescription: "Comprehensive frontend development using the latest React features and Tailwind CSS for rapid, responsive design.", year: "2026", category: "Frontend" },
+  { id: 30, title: "Backend Stack", image: project4, match: "Primary", tags: ["Node.js", "NestJS", "PostgreSQL", "Redis"], description: "Scalable server logic", longDescription: "Building robust backend services with microservices architecture and efficient data management.", year: "2026", category: "Backend" },
+  { id: 31, title: "Tools & DevOps", image: project2, match: "Primary", tags: ["Docker", "Kubernetes", "GitHub Actions", "Terraform"], description: "Infrastructure & Automation", longDescription: "Streamlining deployment pipelines and managing cloud infrastructure for high-availability applications.", year: "2026", category: "DevOps" },
 ];
 
 export const languageItems: ContentItem[] = [
-  { id: 22, title: "JavaScript/TypeScript", image: project3, match: "Native", tags: ["ES6+", "TS 5.0", "Node", "Browser"], description: "Core Programming", longDescription: "Deep understanding of JavaScript internals, asynchronous programming, and TypeScript's advanced type system.", year: "8+ years", category: "Core" },
-  { id: 23, title: "Python", image: project5, match: "Fluent", tags: ["Data Science", "Automation", "Django", "FastAPI"], description: "Scripting & Data", longDescription: "Expertise in Python for various applications from simple automation scripts to complex machine learning models.", year: "5+ years", category: "Versatile" },
-  { id: 24, title: "Go", image: project6, match: "Proficient", tags: ["Concurrency", "Microservices", "Performance"], description: "High-performance", longDescription: "Implementing efficient, concurrent backend services where performance and reliability are paramount.", year: "2+ years", category: "Systems" },
+  { id: 32, title: "JavaScript/TypeScript", image: project3, match: "Native", tags: ["ES6+", "TS 5.0", "Node", "Browser"], description: "Core Programming", longDescription: "Deep understanding of JavaScript internals, asynchronous programming, and TypeScript's advanced type system.", year: "8+ years", category: "Core" },
+  { id: 33, title: "Python", image: project5, match: "Fluent", tags: ["Data Science", "Automation", "Django", "FastAPI"], description: "Scripting & Data", longDescription: "Expertise in Python for various applications from simple automation scripts to complex machine learning models.", year: "5+ years", category: "Versatile" },
+  { id: 34, title: "Go", image: project6, match: "Proficient", tags: ["Concurrency", "Microservices", "Performance"], description: "High-performance", longDescription: "Implementing efficient, concurrent backend services where performance and reliability are paramount.", year: "2+ years", category: "Systems" },
 ];
 
 export const certificationItems: ContentItem[] = [
-  { id: 25, title: "AWS Solutions Architect", image: project2, match: "Certified", tags: ["Cloud", "Architecture", "Security"], description: "Associate Level", longDescription: "Validates ability to design and deploy scalable, highly available, and fault-tolerant systems on AWS.", year: "2023", category: "AWS" },
-  { id: 26, title: "Professional Google Developer", image: project1, match: "Certified", tags: ["Cloud", "Firebase", "Web"], description: "Mobile Web Specialist", longDescription: "Demonstrates advanced skill in web performance, accessibility, and offline-first applications.", year: "2024", category: "Google" },
-  { id: 27, title: "Meta Front-End Developer", image: project3, match: "Certified", tags: ["React", "UX", "Web"], description: "Professional Cert", longDescription: "Comprehensive training in modern front-end development, responsive design, and iterative testing.", year: "2023", category: "Meta" },
+  { id: 35, title: "AWS Solutions Architect", image: project2, match: "Certified", tags: ["Cloud", "Architecture", "Security"], description: "Associate Level", longDescription: "Validates ability to design and deploy scalable, highly available, and fault-tolerant systems on AWS.", year: "2023", category: "AWS" },
+  { id: 36, title: "Professional Google Developer", image: project1, match: "Certified", tags: ["Cloud", "Firebase", "Web"], description: "Mobile Web Specialist", longDescription: "Demonstrates advanced skill in web performance, accessibility, and offline-first applications.", year: "2024", category: "Google" },
+  { id: 37, title: "Meta Front-End Developer", image: project3, match: "Certified", tags: ["React", "UX", "Web"], description: "Professional Cert", longDescription: "Comprehensive training in modern front-end development, responsive design, and iterative testing.", year: "2023", category: "Meta" },
 ];
 
 export default ContentRow;

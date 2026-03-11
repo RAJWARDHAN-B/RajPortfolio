@@ -12,7 +12,9 @@ const SearchResults = ({ query, items }: { query: string; items: ContentItem[] }
             item.title.toLowerCase().includes(query.toLowerCase()) ||
             item.tags.some((tag) => tag.toLowerCase().includes(query.toLowerCase())) ||
             item.category.toLowerCase().includes(query.toLowerCase()) ||
-            item.description.toLowerCase().includes(query.toLowerCase())
+            item.description.toLowerCase().includes(query.toLowerCase()) ||
+            item.longDescription.toLowerCase().includes(query.toLowerCase()) ||
+            item.year.toLowerCase().includes(query.toLowerCase())
     );
 
     return (
