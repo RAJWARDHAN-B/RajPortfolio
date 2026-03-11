@@ -34,73 +34,74 @@ const SearchResults = ({ query, items }: { query: string; items: ContentItem[] }
                     </ul>
                 </div>
             ) : (
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-y-12 gap-x-4">
-                    {filteredItems.map((item, idx) => (
-                        <motion.div
-                            key={item.id}
-                            className="relative group/card cursor-pointer"
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ delay: idx * 0.05, duration: 0.4 }}
-                            viewport={{ once: true }}
-                            onMouseEnter={() => setHoveredId(item.id)}
-                            onMouseLeave={() => setHoveredId(null)}
-                            onClick={() => setSelectedItem(item)}
-                        >
-                            <div className="netflix-card aspect-video bg-card/50">
-                                <img
-                                    src={item.image}
-                                    alt={item.title}
-                                    className="w-full h-full object-cover rounded-sm"
-                                />
+                <div className="max-w-[1400px] mx-auto">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-y-16 gap-x-3 md:gap-x-4">
+                        {filteredItems.map((item, idx) => (
+                            <motion.div
+                                key={item.id}
+                                className="relative flex flex-col group/card cursor-pointer"
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                whileInView={{ opacity: 1, scale: 1 }}
+                                transition={{ delay: idx * 0.05, duration: 0.4 }}
+                                viewport={{ once: true }}
+                                onMouseEnter={() => setHoveredId(item.id)}
+                                onMouseLeave={() => setHoveredId(null)}
+                                onClick={() => setSelectedItem(item)}
+                            >
+                                <div className="netflix-card aspect-video bg-card/50 w-full overflow-hidden rounded-md border border-white/5 group-hover/card:z-50 group-hover/card:shadow-2xl transition-all duration-300">
+                                    <img
+                                        src={item.image}
+                                        alt={item.title}
+                                        className="w-full h-full object-cover transform transition-transform duration-500 group-hover/card:scale-105"
+                                    />
 
-                                {hoveredId === item.id && (
-                                    <motion.div
-                                        initial={{ opacity: 0 }}
-                                        animate={{ opacity: 1 }}
-                                        className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent flex flex-col justify-end p-3 rounded-sm z-[100] transform scale-105 transition-transform"
-                                        style={{ backgroundColor: "rgba(20,20,20,0.4)" }}
-                                    >
-                                        <div className="flex gap-2 mb-2">
-                                            <button
-                                                className="w-7 h-7 rounded-full bg-white flex items-center justify-center hover:bg-gray-300 transition-colors"
-                                                onClick={(e) => {
-                                                    e.stopPropagation();
-                                                    if (item.url) window.open(item.url, "_blank");
-                                                }}
-                                            >
-                                                <Play className="w-3.5 h-3.5 text-black fill-current" />
-                                            </button>
-                                            <button className="w-7 h-7 rounded-full border border-gray-400 flex items-center justify-center hover:border-white transition-colors bg-[#2a2a2a]/60">
-                                                <Plus className="w-3.5 h-3.5 text-white" />
-                                            </button>
-                                            <button className="w-7 h-7 rounded-full border border-gray-400 flex items-center justify-center hover:border-white transition-colors bg-[#2a2a2a]/60">
-                                                <ThumbsUp className="w-3.5 h-3.5 text-white" />
-                                            </button>
-                                            <button
-                                                className="w-7 h-7 rounded-full border border-gray-400 flex items-center justify-center hover:border-white transition-colors ml-auto bg-[#2a2a2a]/60"
-                                                onClick={(e) => {
-                                                    e.stopPropagation();
-                                                    setSelectedItem(item);
-                                                }}
-                                            >
-                                                <ChevronDown className="w-3.5 h-3.5 text-white" />
-                                            </button>
-                                        </div>
-                                        <p className="text-xs font-bold text-white">{item.title}</p>
-                                        <p className="text-[10px] text-green-500 font-semibold">{item.match}</p>
-                                        <div className="flex gap-1 mt-1 flex-wrap">
-                                            {item.tags.map((tag) => (
-                                                <span key={tag} className="text-[9px] text-gray-300">
-                                                    {tag}{" · "}
-                                                </span>
-                                            ))}
-                                        </div>
-                                    </motion.div>
-                                )}
-                            </div>
-                        </motion.div>
-                    ))}
+                                    {hoveredId === item.id && (
+                                        <motion.div
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1 }}
+                                            className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent flex flex-col justify-end p-3 rounded-md z-[100]"
+                                        >
+                                            <div className="flex gap-2 mb-2">
+                                                <button
+                                                    className="w-7 h-7 rounded-full bg-white flex items-center justify-center hover:bg-gray-300 transition-colors"
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        if (item.url) window.open(item.url, "_blank");
+                                                    }}
+                                                >
+                                                    <Play className="w-3.5 h-3.5 text-black fill-current" />
+                                                </button>
+                                                <button className="w-7 h-7 rounded-full border border-gray-400 flex items-center justify-center hover:border-white transition-colors bg-[#2a2a2a]/60">
+                                                    <Plus className="w-3.5 h-3.5 text-white" />
+                                                </button>
+                                                <div className="flex items-center justify-center w-7 h-7 rounded-full border border-gray-400 hover:border-white transition-colors bg-[#2a2a2a]/60">
+                                                  <ThumbsUp className="w-3.5 h-3.5 text-white" />
+                                                </div>
+                                                <button
+                                                    className="w-7 h-7 rounded-full border border-gray-400 flex items-center justify-center hover:border-white transition-colors ml-auto bg-[#2a2a2a]/60"
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        setSelectedItem(item);
+                                                    }}
+                                                >
+                                                    <ChevronDown className="w-3.5 h-3.5 text-white" />
+                                                </button>
+                                            </div>
+                                            <p className="text-xs font-bold text-white line-clamp-1">{item.title}</p>
+                                            <p className="text-[10px] text-green-500 font-semibold">{item.match}</p>
+                                            <div className="flex gap-1 mt-1 flex-wrap">
+                                                {item.tags.slice(0, 3).map((tag) => (
+                                                    <span key={tag} className="text-[9px] text-gray-300">
+                                                        {tag}{" · "}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        </motion.div>
+                                    )}
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
                 </div>
             )}
 
