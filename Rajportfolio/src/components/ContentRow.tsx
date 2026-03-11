@@ -221,54 +221,69 @@ const ContentRow = ({
                 onMouseEnter={() => setHoveredId(item.id)}
                 onMouseLeave={() => setHoveredId(null)}
               >
-                <div className="netflix-card aspect-video bg-card/50" onClick={() => setSelectedItem(item)}>
+                <div className="netflix-card aspect-video bg-card/50 shadow-lg group-hover/card:ring-2 ring-primary/50 transition-all duration-300" onClick={() => setSelectedItem(item)}>
                   <img
                     src={item.image}
                     alt={item.title}
                     className="w-full h-full object-cover"
                   />
+                  
+                  {/* Default info shown without hover */}
+                  <div className={`absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/90 via-black/40 to-transparent transition-opacity duration-300 ${hoveredId === item.id ? 'opacity-0' : 'opacity-100'}`}>
+                    <p className="text-sm font-bold text-white mb-0.5 line-clamp-1">{item.title}</p>
+                    <div className="flex items-center gap-2 text-[10px]">
+                      <span className="text-primary font-bold">{item.match}</span>
+                      <span className="text-gray-300 font-medium">• {item.category}</span>
+                    </div>
+                  </div>
 
-                  {hoveredId === item.id && (
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent flex flex-col justify-end p-3"
-                    >
-                      <div className="flex gap-2 mb-2">
-                        <button
-                          className="w-7 h-7 rounded-full bg-foreground flex items-center justify-center hover:scale-110 transition-transform"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            if (item.url) window.open(item.url, '_blank');
-                          }}
-                        >
-                          <Play className="w-3.5 h-3.5 text-background fill-current" />
-                        </button>
-                        <button className="w-7 h-7 rounded-full border border-muted-foreground flex items-center justify-center hover:border-foreground transition-colors">
-                          <Plus className="w-3.5 h-3.5 text-foreground" />
-                        </button>
-                        <LikeButton size="sm" />
-                        <button
-                          className="w-7 h-7 rounded-full border border-muted-foreground flex items-center justify-center hover:border-foreground transition-colors ml-auto"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setSelectedItem(item);
-                          }}
-                        >
-                          <ChevronDown className="w-3.5 h-3.5 text-foreground" />
-                        </button>
-                      </div>
-                      <p className="text-xs font-bold text-foreground">{item.title}</p>
-                      <p className="text-[10px] text-primary font-semibold">{item.match}</p>
-                      <div className="flex gap-1 mt-1 flex-wrap">
-                        {item.tags.map((tag) => (
-                          <span key={tag} className="text-[9px] text-muted-foreground">
-                            {tag}{" · "}
-                          </span>
-                        ))}
-                      </div>
-                    </motion.div>
-                  )}
+                  <AnimatePresence>
+                    {hoveredId === item.id && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 5 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.95 }}
+                        className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-black/20 flex flex-col justify-end p-4 backdrop-blur-[1px]"
+                      >
+                        <div className="flex gap-2 mb-3">
+                          <button
+                            className="w-8 h-8 rounded-full bg-foreground flex items-center justify-center hover:scale-110 transition-transform shadow-lg"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              if (item.url) window.open(item.url, '_blank');
+                            }}
+                          >
+                            <Play className="w-4 h-4 text-background fill-current ml-0.5" />
+                          </button>
+                          <button className="w-8 h-8 rounded-full bg-secondary/80 border border-muted-foreground/30 flex items-center justify-center hover:bg-secondary hover:border-foreground transition-all">
+                            <Plus className="w-4 h-4 text-foreground" />
+                          </button>
+                          <LikeButton size="sm" />
+                          <button
+                            className="w-8 h-8 rounded-full bg-secondary/80 border border-muted-foreground/30 flex items-center justify-center hover:bg-secondary hover:border-foreground transition-all ml-auto"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setSelectedItem(item);
+                            }}
+                          >
+                            <ChevronDown className="w-4 h-4 text-foreground" />
+                          </button>
+                        </div>
+                        <p className="text-sm font-bold text-white mb-0.5">{item.title}</p>
+                        <p className="text-[11px] text-primary font-bold mb-1">{item.match}</p>
+                        <div className="flex gap-1.5 mt-1 flex-wrap">
+                          {item.tags.slice(0, 3).map((tag) => (
+                            <span key={tag} className="text-[10px] text-muted-foreground">
+                              {tag}
+                            </span>
+                          ))}
+                          {item.tags.length > 3 && (
+                            <span className="text-[10px] text-muted-foreground">+{item.tags.length - 3}</span>
+                          )}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               </motion.div>
             ))}

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Play, Plus, ThumbsUp, ChevronDown } from "lucide-react";
 import { ContentItem, DetailModal } from "./ContentRow";
 
@@ -48,56 +48,68 @@ const SearchResults = ({ query, items }: { query: string; items: ContentItem[] }
                                 onMouseLeave={() => setHoveredId(null)}
                                 onClick={() => setSelectedItem(item)}
                             >
-                                <div className="netflix-card aspect-video bg-card/50 w-full overflow-hidden rounded-md border border-white/5 group-hover/card:z-50 group-hover/card:shadow-2xl transition-all duration-300">
+                                <div className="netflix-card aspect-video bg-card/50 w-full overflow-hidden border border-white/5 group-hover/card:z-50 group-hover/card:shadow-2xl group-hover/card:ring-2 ring-primary/50 transition-all duration-300">
                                     <img
                                         src={item.image}
                                         alt={item.title}
                                         className="w-full h-full object-cover transform transition-transform duration-500 group-hover/card:scale-105"
                                     />
 
-                                    {hoveredId === item.id && (
-                                        <motion.div
-                                            initial={{ opacity: 0 }}
-                                            animate={{ opacity: 1 }}
-                                            className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent flex flex-col justify-end p-3 rounded-md z-[100]"
-                                        >
-                                            <div className="flex gap-2 mb-2">
-                                                <button
-                                                    className="w-7 h-7 rounded-full bg-white flex items-center justify-center hover:bg-gray-300 transition-colors"
-                                                    onClick={(e) => {
-                                                        e.stopPropagation();
-                                                        if (item.url) window.open(item.url, "_blank");
-                                                    }}
-                                                >
-                                                    <Play className="w-3.5 h-3.5 text-black fill-current" />
-                                                </button>
-                                                <button className="w-7 h-7 rounded-full border border-gray-400 flex items-center justify-center hover:border-white transition-colors bg-[#2a2a2a]/60">
-                                                    <Plus className="w-3.5 h-3.5 text-white" />
-                                                </button>
-                                                <div className="flex items-center justify-center w-7 h-7 rounded-full border border-gray-400 hover:border-white transition-colors bg-[#2a2a2a]/60">
-                                                  <ThumbsUp className="w-3.5 h-3.5 text-white" />
+                                    {/* Default info shown without hover */}
+                                    <div className={`absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/90 via-black/40 to-transparent transition-opacity duration-300 ${hoveredId === item.id ? 'opacity-0' : 'opacity-100'}`}>
+                                        <p className="text-xs font-bold text-white mb-0.5 line-clamp-1">{item.title}</p>
+                                        <div className="flex items-center gap-2 text-[9px]">
+                                            <span className="text-primary font-bold">{item.match}</span>
+                                            <span className="text-gray-300 font-medium">• {item.category}</span>
+                                        </div>
+                                    </div>
+
+                                    <AnimatePresence>
+                                        {hoveredId === item.id && (
+                                            <motion.div
+                                                initial={{ opacity: 0, y: 5 }}
+                                                animate={{ opacity: 1, y: 0 }}
+                                                exit={{ opacity: 0, scale: 0.95 }}
+                                                className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-black/20 flex flex-col justify-end p-3 backdrop-blur-[1px] z-[100]"
+                                            >
+                                                <div className="flex gap-2 mb-2">
+                                                    <button
+                                                        className="w-7 h-7 rounded-full bg-white flex items-center justify-center hover:scale-110 transition-transform shadow-lg"
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            if (item.url) window.open(item.url, "_blank");
+                                                        }}
+                                                    >
+                                                        <Play className="w-3.5 h-3.5 text-black fill-current ml-0.5" />
+                                                    </button>
+                                                    <button className="w-7 h-7 rounded-full bg-[#2a2a2a]/80 border border-gray-400/30 flex items-center justify-center hover:bg-[#2a2a2a] hover:border-white transition-all">
+                                                        <Plus className="w-3.5 h-3.5 text-white" />
+                                                    </button>
+                                                    <button className="w-7 h-7 rounded-full bg-[#2a2a2a]/80 border border-gray-400/30 flex items-center justify-center hover:bg-[#2a2a2a] hover:border-white transition-all">
+                                                        <ThumbsUp className="w-3.5 h-3.5 text-white" />
+                                                    </button>
+                                                    <button
+                                                        className="w-7 h-7 rounded-full bg-[#2a2a2a]/80 border border-gray-400/30 flex items-center justify-center hover:bg-[#2a2a2a] hover:border-white transition-all ml-auto"
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            setSelectedItem(item);
+                                                        }}
+                                                    >
+                                                        <ChevronDown className="w-3.5 h-3.5 text-white" />
+                                                    </button>
                                                 </div>
-                                                <button
-                                                    className="w-7 h-7 rounded-full border border-gray-400 flex items-center justify-center hover:border-white transition-colors ml-auto bg-[#2a2a2a]/60"
-                                                    onClick={(e) => {
-                                                        e.stopPropagation();
-                                                        setSelectedItem(item);
-                                                    }}
-                                                >
-                                                    <ChevronDown className="w-3.5 h-3.5 text-white" />
-                                                </button>
-                                            </div>
-                                            <p className="text-xs font-bold text-white line-clamp-1">{item.title}</p>
-                                            <p className="text-[10px] text-green-500 font-semibold">{item.match}</p>
-                                            <div className="flex gap-1 mt-1 flex-wrap">
-                                                {item.tags.slice(0, 3).map((tag) => (
-                                                    <span key={tag} className="text-[9px] text-gray-300">
-                                                        {tag}{" · "}
-                                                    </span>
-                                                ))}
-                                            </div>
-                                        </motion.div>
-                                    )}
+                                                <p className="text-xs font-bold text-white mb-0.5">{item.title}</p>
+                                                <p className="text-[10px] text-primary font-bold mb-1">{item.match}</p>
+                                                <div className="flex gap-1.5 mt-1 flex-wrap">
+                                                    {item.tags.slice(0, 3).map((tag) => (
+                                                        <span key={tag} className="text-[9px] text-gray-400">
+                                                            {tag}
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
                                 </div>
                             </motion.div>
                         ))}
