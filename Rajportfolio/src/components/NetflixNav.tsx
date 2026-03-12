@@ -1,5 +1,13 @@
 import { useState, useEffect, useRef } from "react";
-import { Search, Bell, X } from "lucide-react";
+import { Search, Bell, X, FileText, Download, User as UserIcon, LogOut } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const navItems = ["Home", "About", "Projects", "Experience", "TechStack", "Languages", "Contact"];
 
@@ -101,14 +109,49 @@ const NetflixNav = ({ onSearch }: { onSearch?: (query: string) => void }) => {
             )}
           </div>
 
-          <Bell className="w-5 h-5 text-foreground cursor-pointer hover:text-muted-foreground transition-colors" />
-          <div className="w-8 h-8 rounded overflow-hidden flex items-center justify-center cursor-pointer">
-            <img
-              src="/Rnetflixicon.png"
-              alt="Profile"
-              className="w-full h-full object-cover"
-            />
-          </div>
+          <Bell className="w-5 h-5 text-foreground cursor-pointer hover:text-muted-foreground transition-colors hidden sm:block" />
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <div className="w-8 h-8 rounded overflow-hidden flex items-center justify-center cursor-pointer transition-transform hover:scale-110">
+                <img
+                  src="/Rnetflixicon.png"
+                  alt="Profile"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-56 bg-netflix-dark/95 backdrop-blur-md border-neutral-800 text-white" align="end">
+              <DropdownMenuLabel className="flex items-center gap-2">
+                <UserIcon className="w-4 h-4" />
+                <span>My Profile</span>
+              </DropdownMenuLabel>
+              <DropdownMenuSeparator className="bg-neutral-800" />
+              <DropdownMenuItem
+                className="cursor-pointer hover:bg-white/10 flex items-center gap-2"
+                onClick={() => window.open("/Rajwardhan_Ashok_Bhandigare.pdf", "_blank")}
+              >
+                <FileText className="w-4 h-4" />
+                <span>View Resume</span>
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                className="cursor-pointer hover:bg-white/10 flex items-center gap-2 text-primary focus:text-primary"
+                onClick={() => {
+                  const link = document.createElement('a');
+                  link.href = '/Rajwardhan_Ashok_Bhandigare.pdf';
+                  link.download = 'Rajwardhan_Resume.pdf';
+                  link.click();
+                }}
+              >
+                <Download className="w-4 h-4" />
+                <span>Download CV</span>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator className="bg-neutral-800" />
+              <DropdownMenuItem className="cursor-pointer hover:bg-white/10 flex items-center gap-2 opacity-50 cursor-not-allowed">
+                <LogOut className="w-4 h-4" />
+                <span>Sign Out of Portfolio</span>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
 
           {/* Mobile hamburger */}
           <button

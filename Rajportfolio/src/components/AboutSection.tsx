@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { User, MapPin, Calendar, Award } from "lucide-react";
+import { User, MapPin, Calendar, Award, FileText, Download } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const AboutSection = () => {
   return (
@@ -25,6 +26,28 @@ const AboutSection = () => {
             contributing to open-source, or participating in hackathons.
             I believe in writing clean, maintainable code and building seamless digital experiences.
           </p>
+          <div className="mt-8 flex flex-wrap gap-4">
+            <Button
+              className="bg-primary hover:bg-primary/90 text-white flex items-center gap-2 px-6"
+              onClick={() => window.open("/Rajwardhan_Ashok_Bhandigare.pdf", "_blank")}
+            >
+              <FileText className="w-4 h-4" />
+              View Full Resume
+            </Button>
+            <Button
+              variant="outline"
+              className="border-neutral-700 hover:bg-white/10 flex items-center gap-2 px-6"
+              onClick={() => {
+                const link = document.createElement('a');
+                link.href = '/Rajwardhan_Ashok_Bhandigare.pdf';
+                link.download = 'Rajwardhan_Resume.pdf';
+                link.click();
+              }}
+            >
+              <Download className="w-4 h-4" />
+              Download CV
+            </Button>
+          </div>
         </motion.div>
 
         <motion.div

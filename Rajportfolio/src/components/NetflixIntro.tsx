@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import tudumSound from "@/assets/sound/netflix-tudum-sfx-n-c.mp3";
 
 const NetflixIntro = ({ onComplete }: { onComplete: () => void }) => {
-  const [phase, setPhase] = useState<"sound" | "letter" | "done" | "waiting_interaction">("sound");
+  const [phase, setPhase] = useState<"sound" | "letter" | "done">("sound");
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
@@ -15,7 +15,6 @@ const NetflixIntro = ({ onComplete }: { onComplete: () => void }) => {
     let timer2: NodeJS.Timeout;
 
     const startSequence = () => {
-      // If we were waiting for interaction, reset to sound phase first so the animations trigger properly
       setPhase("sound");
       timer1 = setTimeout(() => setPhase("letter"), 500);
       timer2 = setTimeout(() => {
@@ -27,11 +26,11 @@ const NetflixIntro = ({ onComplete }: { onComplete: () => void }) => {
     const playAudio = () => {
       audio.play().then(() => {
         console.log("Audio playing successfully");
-        startSequence();
       }).catch((err) => {
-        console.warn("Autoplay blocked, waiting for user interaction:", err);
-        setPhase("waiting_interaction");
+        console.warn("Autoplay blocked, continuing without sound:", err);
       });
+      // Always start the sequence, even if audio is blocked
+      startSequence();
     };
 
     playAudio();
@@ -40,7 +39,6 @@ const NetflixIntro = ({ onComplete }: { onComplete: () => void }) => {
     const handleFirstInteraction = () => {
       if (audio.paused) {
         audio.play().catch(console.error);
-        startSequence();
       }
       window.removeEventListener("click", handleFirstInteraction);
     };
