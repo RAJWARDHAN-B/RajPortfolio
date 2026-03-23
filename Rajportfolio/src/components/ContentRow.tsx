@@ -319,17 +319,17 @@ export const projectItems: ContentItem[] = [
 ];
 
 export const experienceItems: ContentItem[] = [
-  { 
-    id: 18, 
-    title: "Research Intern @ IIT Kharagpur", 
-    image: comingSoonImage, 
-    match: "Coming Soon", 
-    tags: ["Research", "Upcoming"], 
-    description: "Acceptance Received", 
-    longDescription: "Incoming Research Internship at Indian Institute of Technology Kharagpur. Focus and project details to be updated shortly.", 
-    year: "2026", 
-    category: "Upcoming" 
-  },
+  // { 
+  //   id: 18, 
+  //   title: "Research Intern @ IIT Kharagpur", 
+  //   image: comingSoonImage, 
+  //   match: "Coming Soon", 
+  //   tags: ["Research", "Upcoming"], 
+  //   description: "Acceptance Received", 
+  //   longDescription: "Incoming Research Internship at Indian Institute of Technology Kharagpur. Focus and project details to be updated shortly.", 
+  //   year: "2026", 
+  //   category: "Upcoming" 
+  // },
   { 
     id: 19, 
     title: "CV Research Intern @ IIT Mandi", 
