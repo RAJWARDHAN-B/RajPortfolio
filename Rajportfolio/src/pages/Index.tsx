@@ -8,7 +8,8 @@ import ContentRow, {
   skillItems,
   techStackItems,
   languageItems,
-  certificationItems
+  certificationItems,
+  publicationItems
 } from "@/components/ContentRow";
 import AboutSection from "@/components/AboutSection";
 import StrangerThings3D from "@/components/StrangerThings3D";
@@ -29,6 +30,7 @@ const Index = () => {
     ...languageItems,
     ...skillItems,
     ...certificationItems,
+    ...publicationItems,
   ];
 
   const handleIntroComplete = useCallback(() => {
@@ -58,6 +60,10 @@ const Index = () => {
 
                 <section id="experience">
                   <ContentRow title="Experience" items={experienceItems} />
+                </section>
+
+                <section id="publications">
+                  <ContentRow title="Publications & Research" items={publicationItems} />
                 </section>
 
                 <section id="techstack">

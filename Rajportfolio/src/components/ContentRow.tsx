@@ -26,6 +26,7 @@ import tindogImage from "@/assets/images/tindog.png";
 import waste2worthImage from "@/assets/images/waste2worth.png";
 import watchdogImage from "@/assets/images/watchdog.png";
 import comingSoonImage from "@/assets/comingsoon.jpg";
+import dfdSysArchImage from "@/assets/dfd_sys_arch.png";
 
 export interface ContentItem {
   id: number;
@@ -401,6 +402,21 @@ export const certificationItems: ContentItem[] = [
   { id: 35, title: "AWS Solutions Architect", image: project2, match: "Certified", tags: ["Cloud", "Architecture", "Security"], description: "Associate Level", longDescription: "Validates ability to design and deploy scalable, highly available, and fault-tolerant systems on AWS.", year: "2023", category: "AWS" },
   { id: 36, title: "Professional Google Developer", image: project1, match: "Certified", tags: ["Cloud", "Firebase", "Web"], description: "Mobile Web Specialist", longDescription: "Demonstrates advanced skill in web performance, accessibility, and offline-first applications.", year: "2024", category: "Google" },
   { id: 37, title: "Meta Front-End Developer", image: project3, match: "Certified", tags: ["React", "UX", "Web"], description: "Professional Cert", longDescription: "Comprehensive training in modern front-end development, responsive design, and iterative testing.", year: "2023", category: "Meta" },
+];
+
+export const publicationItems: ContentItem[] = [
+  { 
+    id: 38, 
+    title: "A Robust and Interpretable Multimodal Deepfake Detection Framework", 
+    image: dfdSysArchImage, 
+    match: "Published", 
+    tags: ["Deepfake Detection", "Multimodal", "XAI"], 
+    description: "Multimodal deepfake detection framework that fuses visual and auditory modalities.", 
+    longDescription: "The rapid proliferation of artificial intelligence–driven media manipulation, commonly referred to as deepfakes, poses a critical challenge to information authenticity, personal security, and societal trust. As generative models such as diffusion networks and transformer-based architectures continue to evolve, their synthetic outputs exhibit near-authentic realism, achieving structural similarity indices (SSIM) exceeding 0.98 in several benchmarks, thereby rendering traditional detection methods increasingly ineffective. Existing unimodal detectors—often limited to visual or audio cues—show poor generalization, with cross-dataset accuracies typically below 70%, and operate as opaque “black box” systems with minimal interpretability. Motivated by these restrictions, this paper proposes a multimodal deepfake detection framework that fuses visual and auditory modalities through a bidirectional crossmodal fusion mechanism to capture subtle spatial-temporal and acoustic inconsistencies that generative models struggle to replicate coherently. The proposed framework is expected to offer meaningful and substantial improvements over the existing solutions, roughly 10-12%, this could be made possible with the use of multimodal fusion to capture inconsistencies that the current baseline models may often miss, by having a multimodal approach the framework’s robustness is expected to be enhanced by around 7%. Current techniques are mostly black boxes. i.e. they do not provide any insights into how they make the decisions, this issue is also addressed in the research by integrating explainable AI components such as Grad-CAM based special visualizations. This would improve the system transparency by a lot. Overall, this approach aims to provide a more reliable and accountable solution for deepfake detection, contributing to the ongoing efforts in the development of trustworthy AI-driven media authentication tools.", 
+    year: "2026", 
+    category: "Publication",
+    url: "https://pijet.org/papers/volume-3%20issue-2/Final%20Revised%20Paper_Pijet-02_June26.pdf"
+  }
 ];
 
 export default ContentRow;
