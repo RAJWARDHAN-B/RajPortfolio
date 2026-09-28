@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { User, MapPin, Calendar, Award, FileText, Download } from "lucide-react";
+import { User, MapPin, Calendar, Award, FileText, Download, Trophy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const AboutSection = () => {
@@ -19,12 +19,10 @@ const AboutSection = () => {
             THE STORY SO FAR
           </h3>
           <p className="text-muted-foreground leading-relaxed mb-4">
-            Hello! I am a third-year IT Engineering student at Pune Institute of Computer Technology (PICT), Pune. I'm a passionate developer who loves turning complex problems into simple, beautiful, and intuitive solutions.
+            I am a B.E. Information Technology student at PICT Pune (CGPA 9.3/10, graduating 2027) and a Software Engineering Intern at Michelin. I build full-stack products and AI-enabled workflows across Python, backend systems, and modern web stacks.
           </p>
           <p className="text-muted-foreground leading-relaxed">
-            When I'm not studying or building projects, you'll find me exploring new technologies,
-            contributing to open-source, or participating in hackathons.
-            I believe in writing clean, maintainable code and building seamless digital experiences.
+            Recent work spans chatbot features, an ERP/MES platform for precision manufacturing, and applied ML systems. My research experience includes computer vision at IIT Mandi and ML systems work at IIT Kharagpur.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
             <Button
@@ -58,10 +56,10 @@ const AboutSection = () => {
           className="grid grid-cols-2 gap-4"
         >
           {[
-            { icon: User, label: "Role", value: "IT Engineering Student" },
-            { icon: MapPin, label: "Location", value: "Pune, India" },
-            { icon: Calendar, label: "Experience", value: "3rd Year Student" },
-            { icon: Award, label: "College", value: "PICT Pune" },
+            { icon: User, label: "Current Role", value: "Software Engineering Intern" },
+            { icon: MapPin, label: "Location", value: "Michelin · Pune, India" },
+            { icon: Calendar, label: "Education", value: "B.E. Information Technology" },
+            { icon: Award, label: "Graduation · CGPA", value: "2027 · 9.3 / 10" },
           ].map(({ icon: Icon, label, value }, idx) => (
             <motion.div
               key={label}
@@ -77,6 +75,16 @@ const AboutSection = () => {
             </motion.div>
           ))}
         </motion.div>
+      </div>
+
+      <div className="mt-8 max-w-6xl border-t border-border pt-6">
+        <h3 className="flex items-center gap-2 font-display text-xl text-foreground mb-3">
+          <Trophy className="w-5 h-5 text-primary" />
+          COMPETITION HIGHLIGHTS
+        </h3>
+        <p className="text-muted-foreground leading-relaxed">
+          CodeChef 3-Star · LeetCode max rating 1544 · Ranked 6th among 2,000+ at an IIIT Hyderabad competition · Smart India Hackathon 2024 college semi-finalist (top 25 teams)
+        </p>
       </div>
     </section>
   );

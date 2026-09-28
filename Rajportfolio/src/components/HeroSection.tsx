@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Play, Info } from "lucide-react";
+import { Play, Info, FileText } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const HeroSection = () => {
@@ -27,18 +27,18 @@ const HeroSection = () => {
           transition={{ duration: 0.8 }}
         >
           <p className="text-sm md:text-lg text-muted-foreground mb-2 tracking-widest uppercase">
-            Portfolio • 2026 • Creative Developer
+            SOFTWARE ENGINEERING INTERN • MICHELIN
           </p>
           <h1 className="font-display text-5xl md:text-8xl lg:text-9xl text-foreground text-shadow-hero leading-none mb-4">
             RAJWARDHAN
           </h1>
           <p className="text-foreground/90 text-sm md:text-xl max-w-2xl mb-8 leading-relaxed">
-            Crafting immersive digital experiences through full-stack development.
-            Focused on building scalable applications with modern technologies and
-            premium user interfaces.
+            IT Engineering student at PICT Pune (9.3/10 CGPA, graduating 2027),
+            currently building full-stack chatbot features at Michelin. I work across
+            backend systems, applied AI, and reliable software delivery.
           </p>
 
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-4">
             <button
               onClick={() => scrollTo("projects")}
               className="flex items-center gap-2 bg-foreground text-background px-6 md:px-10 py-2.5 md:py-4 rounded-sm font-semibold text-sm md:text-lg hover:bg-foreground/90 transition-all hover:scale-105"
@@ -53,6 +53,15 @@ const HeroSection = () => {
               <Info className="w-5 h-5 md:w-6 md:h-6" />
               More Info
             </button>
+            <a
+              href="/Rajwardhan_Ashok_Bhandigare.pdf"
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center gap-2 border border-foreground/70 bg-black/50 text-foreground px-6 md:px-8 py-2.5 md:py-4 rounded-sm font-semibold text-sm md:text-lg hover:bg-white/10 transition-all"
+            >
+              <FileText className="w-5 h-5 md:w-6 md:h-6" />
+              View Résumé
+            </a>
           </div>
         </motion.div>
       </div>

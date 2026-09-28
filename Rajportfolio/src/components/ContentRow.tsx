@@ -300,108 +300,59 @@ const ContentRow = ({
 };
 
 export const projectItems: ContentItem[] = [
-  { id: 1, title: "Static Portfolio", image: staticportfolioImage, match: "100% Match", tags: ["HTML", "CSS", "JavaScript"], description: "Simple portfolio website in HTML, CSS, JavaScript", longDescription: "A simple portfolio website built using HTML, CSS, and JavaScript. Showcases static web development skills.", year: "2024", category: "Portfolio", url: "https://rajwardhan-b.github.io/rajportfoliostatic/" },
-  { id: 2, title: "Gignut", image: gignutImage, match: "99% Match", tags: ["Web", "Fullstack"], description: "Placeholder description", longDescription: "Placeholder description for Gignut.", year: "2024", category: "Web App", url: "https://gignut.com" },
-  { id: 3, title: "Watchdog", image: watchdogImage, match: "98% Match", tags: ["Web App"], description: "Placeholder description", longDescription: "Placeholder description for Watchdog.", year: "2024", category: "Web App", url: "https://watchdog-6s7x.onrender.com/" },
-  { id: 4, title: "Packmate", image: packmateImage, match: "95% Match", tags: ["Streamlit"], description: "Placeholder description", longDescription: "Placeholder description for Packmate.", year: "2024", category: "Web App", url: "https://packmate.streamlit.app/" },
-  { id: 5, title: "LifeSync", image: lifesyncImage, match: "96% Match", tags: ["Web App"], description: "Placeholder description", longDescription: "Placeholder description for LifeSync.", year: "2024", category: "Web App", url: "https://life-sync-eta.vercel.app/" },
-  { id: 6, title: "Waste2Worth", image: waste2worthImage, match: "97% Match", tags: ["Web App"], description: "Placeholder description", longDescription: "Placeholder description for Waste2Worth.", year: "2024", category: "Web App", url: "https://github.com/RAJWARDHAN-B/donateNGO" },
-  { id: 7, title: "LearnCraft", image: learncraftImage, match: "99% Match", tags: ["Web App"], description: "Placeholder description", longDescription: "Placeholder description for LearnCraft.", year: "2024", category: "Web App", url: "https://learn-craft.vercel.app/" },
-  { id: 8, title: "TinDog", image: tindogImage, match: "95% Match", tags: ["Web App"], description: "Placeholder description", longDescription: "Placeholder description for TinDog.", year: "2024", category: "Web App", url: "https://tindog-website-zeta.vercel.app/" },
-  { id: 9, title: "Glean", image: gleanImage, match: "94% Match", tags: ["Web App"], description: "Placeholder description", longDescription: "Placeholder description for Glean.", year: "2024", category: "Web App", url: "https://glean-nu.vercel.app/home" },
-  { id: 10, title: "SanguineSages", image: sanguinesagesImage, match: "98% Match", tags: ["Web App"], description: "Placeholder description", longDescription: "Placeholder description for SanguineSages.", year: "2024", category: "Web App", url: "https://sanguinesages.vercel.app/" },
-  { id: 11, title: "Felecity", image: felecityImage, match: "96% Match", tags: ["Web App"], description: "Placeholder description", longDescription: "Placeholder description for Felecity.", year: "2024", category: "Web App", url: "https://felecity-frontend.vercel.app/" },
-  { id: 12, title: "SudoQ", image: sudoqImage, match: "99% Match", tags: ["Web App"], description: "Placeholder description", longDescription: "Placeholder description for SudoQ.", year: "2024", category: "Web App", url: "https://cs-50-p-finalproject.vercel.app/" },
-  { id: 13, title: "SportsOrca", image: sportsorcaImage, match: "94% Match", tags: ["Web App"], description: "Placeholder description", longDescription: "Placeholder description for SportsOrca.", year: "2024", category: "Web App", url: "https://sports-orca-mu.vercel.app/" },
-  { id: 14, title: "EmptyCups", image: emptycupsImage, match: "95% Match", tags: ["Web App"], description: "Placeholder description", longDescription: "Placeholder description for EmptyCups.", year: "2024", category: "Web App", url: "https://empty-cups-inter-task.vercel.app/" },
-  { id: 15, title: "AeroLens", image: aerolensImage, match: "97% Match", tags: ["Web App"], description: "Placeholder description", longDescription: "Placeholder description for AeroLens.", year: "2024", category: "Web App", url: "https://aerolens.streamlit.app/" },
-  { id: 16, title: "OVO", image: ovoImage, match: "93% Match", tags: ["Web App"], description: "Placeholder description", longDescription: "Placeholder description for OVO.", year: "2024", category: "Web App", url: "https://ovoeval.streamlit.app/" },
-  { id: 17, title: "Verdantia", image: comingSoonImage, match: "Coming Soon", tags: ["Project", "Upcoming"], description: "Green Tech Platform", longDescription: "Verdantia is an upcoming green technology platform focused on sustainable living and environmental awareness. Stay tuned for updates!", year: "2026", category: "Web App" },
+  { id: 1, title: "LegalBuddy", image: project1, match: "RAG · FAISS", tags: ["Python", "RAG", "FAISS", "Embeddings", "Risk Scoring"], description: "Legal document Q&A with risk scoring", longDescription: "Built an end-to-end backend for legal document question answering. Processed 200MB+ of multi-format documents with FAISS-based retrieval, domain-specific embeddings, and text-classification-based risk scoring.", year: "2026", category: "AI Assistant" },
+  { id: 2, title: "Gignut", image: gignutImage, match: "Production B2B", tags: ["FastAPI", "REST APIs", "Backend", "Database Optimization"], description: "Production-grade B2B platform", longDescription: "Built production-grade backend services and REST APIs for gignut.com using FastAPI. Optimized database queries and API performance.", year: "2026", category: "B2B Platform", url: "https://gignut.com" },
+  { id: 3, title: "WatchDog.ai", image: watchdogImage, match: "Real-time monitoring", tags: ["ELK Stack", "Anomaly Detection", "Logging", "Dashboards"], description: "Anomaly detection for API behavior", longDescription: "Built real-time anomaly-detection pipelines to monitor API behavior with the ELK stack. Developed dashboards and alerting for low-latency logging and performance tracking.", year: "2026", category: "AI / Observability", url: "https://watchdog-6s7x.onrender.com/" },
+  { id: 4, title: "Packmate", image: packmateImage, match: "40% less planning effort", tags: ["LangChain", "LLM", "Prompt Engineering", "Memory"], description: "LLM-powered trip-planning assistant", longDescription: "Developed a conversational trip-planning assistant using LangChain, engineering context-aware prompts and memory handling to reduce trip-planning effort by 40%.", year: "2026", category: "AI Assistant", url: "https://packmate.streamlit.app/" },
+  { id: 5, title: "Static Portfolio", image: staticportfolioImage, match: "Portfolio", tags: ["HTML", "CSS", "JavaScript"], description: "Personal portfolio website", longDescription: "A static portfolio website built with HTML, CSS, and JavaScript.", year: "2024", category: "Portfolio", url: "https://rajwardhan-b.github.io/rajportfoliostatic/" },
+  { id: 6, title: "LifeSync", image: lifesyncImage, match: "Health · Education · Finance", tags: ["Web App"], description: "AI-powered insights platform", longDescription: "A web application presenting AI-powered insights across health, education, and finance.", year: "2024", category: "Web App", url: "https://life-sync-eta.vercel.app/" },
+  { id: 7, title: "Waste2Worth", image: waste2worthImage, match: "Donation platform", tags: ["Web App", "NGO"], description: "Waste and donation project", longDescription: "A web project for connecting donations with nonprofit organizations.", year: "2024", category: "Web App", url: "https://github.com/RAJWARDHAN-B/donateNGO" },
+  { id: 8, title: "LearnCraft", image: learncraftImage, match: "Education", tags: ["Web App"], description: "Learning-focused web application", longDescription: "A web application project in the education space.", year: "2024", category: "Web App", url: "https://learn-craft.vercel.app/" },
+  { id: 9, title: "TinDog", image: tindogImage, match: "Web project", tags: ["Web App"], description: "TinDog website project", longDescription: "A web project with a live deployment.", year: "2024", category: "Web App", url: "https://tindog-website-zeta.vercel.app/" },
+  { id: 10, title: "Glean", image: gleanImage, match: "Web project", tags: ["Web App"], description: "Glean web application", longDescription: "A web application project with a live deployment.", year: "2024", category: "Web App", url: "https://glean-nu.vercel.app/home" },
+  { id: 11, title: "SanguineSages", image: sanguinesagesImage, match: "Web project", tags: ["Web App"], description: "SanguineSages web application", longDescription: "A web application project with a live deployment.", year: "2024", category: "Web App", url: "https://sanguinesages.vercel.app/" },
+  { id: 12, title: "Felecity", image: felecityImage, match: "Web project", tags: ["Web App"], description: "Felecity web application", longDescription: "A web application project with a live deployment.", year: "2024", category: "Web App", url: "https://felecity-frontend.vercel.app/" },
+  { id: 13, title: "SudoQ", image: sudoqImage, match: "Web project", tags: ["Web App"], description: "SudoQ project", longDescription: "A web project with a live deployment.", year: "2024", category: "Web App", url: "https://cs-50-p-finalproject.vercel.app/" },
+  { id: 14, title: "SportsOrca", image: sportsorcaImage, match: "Sports · Web App", tags: ["Web App"], description: "SportsOrca web application", longDescription: "A sports-focused web application project with a live deployment.", year: "2024", category: "Web App", url: "https://sports-orca-mu.vercel.app/" },
+  { id: 15, title: "EmptyCups", image: emptycupsImage, match: "Web project", tags: ["Web App"], description: "EmptyCups web application", longDescription: "A web application project with a live deployment.", year: "2024", category: "Web App", url: "https://empty-cups-inter-task.vercel.app/" },
+  { id: 16, title: "AeroLens", image: aerolensImage, match: "Streamlit app", tags: ["Streamlit"], description: "AeroLens application", longDescription: "A Streamlit project with a live deployment.", year: "2024", category: "Web App", url: "https://aerolens.streamlit.app/" },
+  { id: 17, title: "OVO", image: ovoImage, match: "Streamlit app", tags: ["Streamlit"], description: "OVO application", longDescription: "A Streamlit project with a live deployment.", year: "2024", category: "Web App", url: "https://ovoeval.streamlit.app/" },
+  { id: 18, title: "Verdantia", image: comingSoonImage, match: "Coming Soon", tags: ["Project", "Upcoming"], description: "Green technology platform", longDescription: "An upcoming green technology platform focused on sustainable living and environmental awareness.", year: "2026", category: "Web App" },
 ];
 
 export const experienceItems: ContentItem[] = [
-  // { 
-  //   id: 18, 
-  //   title: "Research Intern @ IIT Kharagpur", 
-  //   image: comingSoonImage, 
-  //   match: "Coming Soon", 
-  //   tags: ["Research", "Upcoming"], 
-  //   description: "Acceptance Received", 
-  //   longDescription: "Incoming Research Internship at Indian Institute of Technology Kharagpur. Focus and project details to be updated shortly.", 
-  //   year: "2026", 
-  //   category: "Upcoming" 
-  // },
-  { 
-    id: 19, 
-    title: "CV Research Intern @ IIT Mandi", 
-    image: project2, 
-    match: "Nov 2025 – Mar 2026", 
-    tags: ["Computer Vision", "Deep Learning", "Research", "Python"], 
-    description: "Solar Cell Defect Detection", 
-    longDescription: "Conducting research on Solar Cell Defect Detection and classification using advanced Computer Vision techniques. Developed deep learning models to automate the identification of micro-cracks and anomalies in photovoltaic cells. Processed large-scale datasets to improve model accuracy and robustness for real-world industrial inspection.", 
-    year: "2025 - 2026", 
-    category: "Internship" 
-  },
-  { 
-    id: 20, 
-    title: "Software Dev Intern @ UNITECTURE", 
-    image: project1, 
-    match: "Dec 2025 – Feb 2026", 
-    tags: ["Full Stack", "HRMS", "Workflow Automation", "React"], 
-    description: "Internal HRMS Development", 
-    longDescription: "Engineered an internal HRMS to streamline organizational workflows. Developed modules for employee data management, attendance tracking, leave processing and Task Management. Focused on creating a secure, user-centric interface to improve internal administrative efficiency.", 
-    year: "2025 - 2026", 
-    category: "Internship" 
-  },
-  { 
-    id: 21, 
-    title: "Full Stack Intern @ Unified Transformation", 
-    image: project3, 
-    match: "July 2025 – Feb 2026", 
-    tags: ["FastAPI", "B2B", "API Design", "Deployment"], 
-    description: "Developed gignut.com", 
-    longDescription: "Developed gignut.com, a production-grade B2B web platform, handling end-to-end development and deployment. Designed and implemented scalable backend services using FastAPI to support core business workflows. Built secure and efficient REST APIs and integrated them with frontend components. Optimized API performance, database queries, and overall system responsiveness.", 
-    year: "2025 - 2026", 
-    category: "Internship" 
-  },
-  { 
-    id: 22, 
-    title: "Web Dev Intern @ Learncraft Engineering", 
-    image: project5, 
-    match: "May – June 2025", 
-    tags: ["React.js", "Clean Architecture", "REST API", "Frontend"], 
-    description: "Modular React Applications", 
-    longDescription: "Developed modular and responsive React.js applications with a focus on clean architecture and performance. Collaborated with backend services and integrated REST APIs for production-grade deployments.", 
-    year: "2025", 
-    category: "Internship" 
-  }
+  { id: 19, title: "Software Engineering Intern @ Michelin", image: project1, match: "Aug 2026 – Present", tags: ["Astro", "Apostrophe CMS", "Python", "Unit Testing"], description: "Full-stack chatbot features", longDescription: "Building full-stack chatbot features across an Astro and Apostrophe CMS frontend with a Python backend. Writing and maintaining unit tests for each module, validating behavior before merge, and resolving issues found through test failures and logs.", year: "2026 – Present", category: "Internship" },
+  { id: 20, title: "Freelance Software Developer @ Gabril Industries", image: project2, match: "Mar 2026 – Jul 2026", tags: ["Python", "ERP", "MES", "Analytics"], description: "ERP and manufacturing execution platform", longDescription: "Built a custom ERP and MES platform for a precision manufacturing and engineering business, integrating procurement, inventory, HRMS, and production workflows. Designed backend pipelines and analytics dashboards for machine efficiency and waste monitoring, using version-controlled, modular development practices.", year: "2026", category: "Freelance" },
+  { id: 21, title: "Research Intern @ IIT Kharagpur", image: project3, match: "May 2026 – Jun 2026", tags: ["PyTorch", "nnU-Net", "ML Systems", "Open Source"], description: "Training pipeline and framework contribution", longDescription: "Built and validated an end-to-end PyTorch training pipeline within nnU-Net, adding a custom trainer with under 0.2% overhead. Debugged and patched a scheduler compatibility issue in the framework and shipped the fix through an open-source GitHub commit.", year: "2026", category: "Research Internship" },
+  { id: 22, title: "Computer Vision Research Intern @ IIT Mandi", image: project4, match: "Nov 2025 – May 2026", tags: ["Computer Vision", "Deep Learning", "Python", "Industrial Imaging"], description: "Industrial defect detection", longDescription: "Developed and evaluated deep learning models for defect detection on large-scale industrial image datasets, improving robustness through systematic preprocessing and testing.", year: "2025 – 2026", category: "Research Internship" },
+  { id: 23, title: "Software Development Intern @ UNITECTURE", image: project5, match: "Jan 2026 – Feb 2026", tags: ["HRMS", "Waste Management", "WhatsApp", "ESSL Biometrics"], description: "Integrated HRMS and waste-management modules", longDescription: "Built HRMS and waste-management modules with WhatsApp and ESSL biometric integrations. Handled end-to-end deployment and production validation.", year: "2026", category: "Internship" },
+  { id: 24, title: "Full Stack Developer Intern @ Unified Transformation", image: project6, match: "Jul 2025 – Feb 2026", tags: ["FastAPI", "REST APIs", "Backend", "Performance"], description: "Backend services for gignut.com", longDescription: "Built production-grade backend services and REST APIs for gignut.com using FastAPI, optimizing database queries and API performance.", year: "2025 – 2026", category: "Internship" },
 ];
 
 export const skillItems: ContentItem[] = [
-  { id: 23, title: "React & Next.js", image: project3, match: "Expert", tags: ["Hooks", "SSR", "RSC", "Redux", "Zustand"], description: "5+ years", longDescription: "Deep expertise in React ecosystem including Next.js, server components, state management with Redux and Zustand, performance optimization, and building design systems. Contributed to open-source React libraries and authored technical blog posts on advanced patterns.", year: "5+ years", category: "Frontend" },
-  { id: 24, title: "TypeScript", image: project1, match: "Expert", tags: ["Types", "Generics", "DX", "Zod"], description: "4+ years", longDescription: "Advanced TypeScript skills including complex generic types, utility types, discriminated unions, and type-safe API layers. Experience with Zod for runtime validation, tRPC for end-to-end type safety, and building type-safe design systems.", year: "4+ years", category: "Language" },
-  { id: 25, title: "Node.js & Express", image: project4, match: "Advanced", tags: ["REST", "GraphQL", "Auth", "Prisma"], description: "4+ years", longDescription: "Extensive experience building RESTful and GraphQL APIs with Node.js. Proficient with Express, Fastify, and NestJS frameworks. Experience with database ORMs (Prisma, Sequelize), authentication (JWT, OAuth), and real-time communication (WebSockets, Socket.io).", year: "4+ years", category: "Backend" },
-  { id: 26, title: "Cloud & DevOps", image: project2, match: "Advanced", tags: ["AWS", "Docker", "CI/CD", "Terraform"], description: "3+ years", longDescription: "Hands-on experience with AWS (Lambda, EC2, S3, RDS, CloudFront), containerization with Docker and Kubernetes, CI/CD pipelines with GitHub Actions, and infrastructure as code with Terraform. Certified AWS Solutions Architect Associate.", year: "3+ years", category: "Infrastructure" },
-  { id: 27, title: "Python & ML", image: project5, match: "Intermediate", tags: ["TensorFlow", "Pandas", "Scikit", "FastAPI"], description: "2+ years", longDescription: "Experience with Python for data science and machine learning. Built predictive models using TensorFlow and scikit-learn, data pipelines with Pandas, and ML-serving APIs with FastAPI. Familiar with NLP, computer vision, and recommendation systems.", year: "2+ years", category: "Data Science" },
-  { id: 28, title: "UI/UX Design", image: project6, match: "Advanced", tags: ["Figma", "Motion", "A11y", "Design Systems"], description: "3+ years", longDescription: "Strong eye for design with proficiency in Figma, prototyping, and design systems. Experience with motion design using Framer Motion and CSS animations. Advocate for accessibility (WCAG 2.1) and inclusive design practices.", year: "3+ years", category: "Design" },
+  { id: 23, title: "Backend & APIs", image: project1, match: "Core stack", tags: ["FastAPI", "Django", "Node.js", "REST APIs", "MySQL", "MongoDB"], description: "Product backends and integrations", longDescription: "Builds backend services and REST APIs with FastAPI, Django, and Node.js, with database experience in MySQL and MongoDB. Recent work includes production APIs, chatbot features, and business workflow integrations.", year: "Current focus", category: "Backend" },
+  { id: 24, title: "Applied ML & AI", image: project2, match: "Applied", tags: ["PyTorch", "TensorFlow", "scikit-learn", "OpenCV", "Transformers", "LangChain"], description: "Research and AI product work", longDescription: "Applied machine learning experience across PyTorch training pipelines, computer vision, and conversational AI. Tools include TensorFlow, scikit-learn, OpenCV, Hugging Face Transformers, and LangChain.", year: "Current focus", category: "AI / ML" },
+  { id: 25, title: "Programming Languages", image: project3, match: "Technical skills", tags: ["Python", "C++", "Java", "JavaScript", "SQL"], description: "Five languages from the résumé", longDescription: "Programming languages listed on the current résumé: Python, C++, Java, JavaScript, and SQL.", year: "Current skills", category: "Languages" },
+  { id: 26, title: "Engineering Practice", image: project4, match: "Production-minded", tags: ["Unit Testing", "Git", "Docker", "Debugging", "Weights & Biases"], description: "Testing, diagnosis, and delivery", longDescription: "Writes unit tests, uses Git and Docker, diagnoses problems through logs, and tracks machine-learning experiments with Weights & Biases.", year: "Current focus", category: "Engineering" },
+  { id: 27, title: "Computer Science Foundations", image: project5, match: "Foundations", tags: ["Data Structures & Algorithms", "OOP", "DBMS", "Operating Systems", "Networking"], description: "Core CS fundamentals", longDescription: "Foundational knowledge in data structures and algorithms, object-oriented programming, database management systems, operating systems, and networking.", year: "Education", category: "Computer Science" },
 ];
 
 export const techStackItems: ContentItem[] = [
-  { id: 29, title: "Frontend Stack", image: project1, match: "Primary", tags: ["React", "Next.js", "Tailwind", "Framer Motion"], description: "Modern UI development", longDescription: "Comprehensive frontend development using the latest React features and Tailwind CSS for rapid, responsive design.", year: "2026", category: "Frontend" },
-  { id: 30, title: "Backend Stack", image: project4, match: "Primary", tags: ["Node.js", "NestJS", "PostgreSQL", "Redis"], description: "Scalable server logic", longDescription: "Building robust backend services with microservices architecture and efficient data management.", year: "2026", category: "Backend" },
-  { id: 31, title: "Tools & DevOps", image: project2, match: "Primary", tags: ["Docker", "Kubernetes", "GitHub Actions", "Terraform"], description: "Infrastructure & Automation", longDescription: "Streamlining deployment pipelines and managing cloud infrastructure for high-availability applications.", year: "2026", category: "DevOps" },
+  { id: 29, title: "Backend & APIs", image: project1, match: "Core stack", tags: ["FastAPI", "Django", "Node.js", "REST APIs", "MySQL", "MongoDB"], description: "Services, APIs, and data", longDescription: "Backend technologies and databases used across recent product work.", year: "2026", category: "Backend" },
+  { id: 30, title: "Applied ML & AI", image: project2, match: "Applied", tags: ["PyTorch", "TensorFlow", "OpenCV", "Transformers", "LangChain"], description: "ML systems, vision, and AI assistants", longDescription: "Applied ML and AI tools used in research, training pipelines, and assistant projects.", year: "2026", category: "AI / ML" },
+  { id: 31, title: "Engineering Toolkit", image: project3, match: "Production", tags: ["Unit Testing", "Git", "Docker", "Weights & Biases", "Log Debugging"], description: "Quality, collaboration, and diagnosis", longDescription: "Tools and practices for testing, version control, containerization, experiment tracking, and debugging.", year: "2026", category: "Engineering" },
 ];
 
 export const languageItems: ContentItem[] = [
-  { id: 32, title: "JavaScript/TypeScript", image: project3, match: "Native", tags: ["ES6+", "TS 5.0", "Node", "Browser"], description: "Core Programming", longDescription: "Deep understanding of JavaScript internals, asynchronous programming, and TypeScript's advanced type system.", year: "8+ years", category: "Core" },
-  { id: 33, title: "Python", image: project5, match: "Fluent", tags: ["Data Science", "Automation", "Django", "FastAPI"], description: "Scripting & Data", longDescription: "Expertise in Python for various applications from simple automation scripts to complex machine learning models.", year: "5+ years", category: "Versatile" },
-  { id: 34, title: "Go", image: project6, match: "Proficient", tags: ["Concurrency", "Microservices", "Performance"], description: "High-performance", longDescription: "Implementing efficient, concurrent backend services where performance and reliability are paramount.", year: "2+ years", category: "Systems" },
+  { id: 32, title: "Python", image: project3, match: "Programming language", tags: ["FastAPI", "Django", "PyTorch", "TensorFlow"], description: "Backend and applied ML", longDescription: "Used across backend development, training pipelines, computer vision, and AI projects.", year: "Current skill", category: "Language" },
+  { id: 33, title: "C++ & Java", image: project5, match: "Programming languages", tags: ["C++", "Java", "OOP", "Data Structures & Algorithms"], description: "Core programming", longDescription: "C++ and Java are listed among current programming skills, alongside computer science fundamentals.", year: "Current skills", category: "Languages" },
+  { id: 34, title: "JavaScript & SQL", image: project6, match: "Programming languages", tags: ["JavaScript", "SQL", "REST APIs", "Databases"], description: "Web and data", longDescription: "JavaScript and SQL are listed among current programming skills, with additional experience building REST APIs and database-backed systems.", year: "Current skills", category: "Languages" },
 ];
 
 export const certificationItems: ContentItem[] = [
-  { id: 35, title: "AWS Solutions Architect", image: project2, match: "Certified", tags: ["Cloud", "Architecture", "Security"], description: "Associate Level", longDescription: "Validates ability to design and deploy scalable, highly available, and fault-tolerant systems on AWS.", year: "2023", category: "AWS" },
-  { id: 36, title: "Professional Google Developer", image: project1, match: "Certified", tags: ["Cloud", "Firebase", "Web"], description: "Mobile Web Specialist", longDescription: "Demonstrates advanced skill in web performance, accessibility, and offline-first applications.", year: "2024", category: "Google" },
-  { id: 37, title: "Meta Front-End Developer", image: project3, match: "Certified", tags: ["React", "UX", "Web"], description: "Professional Cert", longDescription: "Comprehensive training in modern front-end development, responsive design, and iterative testing.", year: "2023", category: "Meta" },
+  { id: 35, title: "Oracle Cloud Infrastructure AI Foundations", image: project2, match: "Certified · 2025", tags: ["Oracle Cloud", "AI Foundations"], description: "Oracle AI Foundations Associate", longDescription: "Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate.", year: "2025", category: "Oracle" },
+  { id: 36, title: "CS50: Python, SQL & Cybersecurity", image: project1, match: "HarvardX", tags: ["Python", "SQL", "Cybersecurity"], description: "HarvardX CS50 certificates", longDescription: "Completed HarvardX CS50 coursework in Python, SQL, and cybersecurity.", year: "Year not listed", category: "HarvardX" },
+  { id: 37, title: "Industry Learning Programs", image: project3, match: "Forage · LinkedIn Learning", tags: ["Tata Data Visualisation", "AWS Solutions Architecture", "Generative AI"], description: "Applied industry learning", longDescription: "Completed Tata Data Visualisation through The Forage, AWS APAC Solutions Architecture, and the Microsoft × LinkedIn Generative AI Career Path.", year: "Years not listed", category: "Professional Development" },
 ];
 
 export const publicationItems: ContentItem[] = [

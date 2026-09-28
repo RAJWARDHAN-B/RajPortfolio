@@ -66,6 +66,10 @@ const Index = () => {
                   <ContentRow title="Publications & Research" items={publicationItems} />
                 </section>
 
+                <section id="certifications">
+                  <ContentRow title="Certifications & Training" items={certificationItems} />
+                </section>
+
                 <section id="techstack">
                   <h2 className="netflix-section-title text-foreground">Expertise & Technologies</h2>
                   <TechStackGraphic />
@@ -75,14 +79,6 @@ const Index = () => {
                   <h2 className="netflix-section-title text-foreground">Languages</h2>
                   <LanguageGraphic />
                 </section>
-
-                {/* <section id="skills">
-                  <ContentRow title="Skills & Technologies" items={skillItems} />
-                </section> */}
-
-                {/* <section id="certifications">
-                  <ContentRow title="Certifications" items={certificationItems} />
-                </section> */}
 
                 <AboutSection />
                 <StrangerThings3D />

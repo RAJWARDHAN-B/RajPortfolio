@@ -9,7 +9,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-const navItems = ["Home", "About", "Projects", "Experience", "TechStack", "Languages", "Contact"];
+const navItems = ["Home", "About", "Projects", "Experience", "Certifications", "TechStack", "Languages", "Contact"];
 
 const NetflixNav = ({ onSearch }: { onSearch?: (query: string) => void }) => {
   const [scrolled, setScrolled] = useState(false);

@@ -1,9 +1,20 @@
 const Footer = () => {
   const links = [
-    ["GitHub", "LinkedIn", "Twitter", "Blog"],
-    ["About", "Projects", "Experience", "Contact"],
-    ["Resume", "Certifications", "Testimonials", "FAQ"],
-    ["Privacy", "Terms", "Sitemap", "RSS"],
+    [
+      { label: "GitHub", href: "https://github.com/RAJWARDHAN-B", external: true },
+      { label: "LinkedIn", href: "https://linkedin.com/in/rajwardhan-bhandigare", external: true },
+      { label: "Email", href: "mailto:rajwardhanpict@gmail.com", external: true },
+    ],
+    [
+      { label: "About", href: "#about" },
+      { label: "Projects", href: "#projects" },
+      { label: "Experience", href: "#experience" },
+    ],
+    [
+      { label: "Résumé", href: "/Rajwardhan_Ashok_Bhandigare.pdf", external: true },
+      { label: "Certifications", href: "#certifications" },
+      { label: "Contact", href: "#contact" },
+    ],
   ];
 
   return (
@@ -17,15 +28,17 @@ const Footer = () => {
         </p>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-          {links.map((col, i) => (
+          {links.map((column, i) => (
             <ul key={i} className="space-y-2">
-              {col.map((link) => (
-                <li key={link}>
+              {column.map((link) => (
+                <li key={link.label}>
                   <a
-                    href="#"
+                    href={link.href}
+                    target={link.external ? "_blank" : undefined}
+                    rel={link.external ? "noreferrer" : undefined}
                     className="text-xs text-muted-foreground hover:underline"
                   >
-                    {link}
+                    {link.label}
                   </a>
                 </li>
               ))}

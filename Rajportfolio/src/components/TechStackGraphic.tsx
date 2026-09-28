@@ -1,49 +1,72 @@
 import { motion } from "framer-motion";
 import { 
-  Code2, 
-  Database, 
-  Globe, 
-  Layers, 
-  Server, 
+  Database,
+  Server,
   Terminal,
   Cpu,
-  Coffee,
-  Shapes
+  Code2
 } from "lucide-react";
 
 const techCategories = [
   {
-    title: "Fullstack Mastery (MERN)",
-    icon: <Globe className="w-5 h-5 text-primary" />,
+    title: "Backend & APIs",
+    icon: <Server className="w-5 h-5 text-primary" />,
     items: [
-      { name: "MongoDB", color: "hover:text-green-500" },
-      { name: "Express", color: "hover:text-white" },
-      { name: "React", color: "hover:text-blue-400" },
-      { name: "Node.js", color: "hover:text-green-400" }
+      { name: "FastAPI", color: "hover:text-teal-400" },
+      { name: "Django", color: "hover:text-green-500" },
+      { name: "Node.js", color: "hover:text-green-400" },
+      { name: "REST APIs", color: "hover:text-blue-400" },
+      { name: "MySQL", color: "hover:text-blue-500" },
+      { name: "MongoDB", color: "hover:text-green-500" }
     ],
     className: "md:col-span-2"
   },
   {
-    title: "Databases & Cloud",
-    icon: <Database className="w-5 h-5 text-primary" />,
+    title: "Programming Languages",
+    icon: <Terminal className="w-5 h-5 text-primary" />,
     items: [
-      { name: "MySQL", color: "hover:text-blue-500" },
-      { name: "PostgreSQL", color: "hover:text-blue-300" },
-      { name: "SQLite", color: "hover:text-sky-400" },
-      { name: "Supabase", color: "hover:text-emerald-500" }
+      { name: "Python", color: "hover:text-yellow-400" },
+      { name: "C++", color: "hover:text-blue-500" },
+      { name: "Java", color: "hover:text-orange-500" },
+      { name: "JavaScript", color: "hover:text-yellow-300" },
+      { name: "SQL", color: "hover:text-blue-300" }
     ],
     className: "md:col-span-1"
   },
   {
-    title: "Core Languages",
-    icon: <Terminal className="w-5 h-5 text-primary" />,
+    title: "Applied ML & AI",
+    icon: <Cpu className="w-5 h-5 text-primary" />,
     items: [
-      { name: "C++", color: "hover:text-blue-600" },
-      { name: "Java", color: "hover:text-orange-500" },
-      { name: "C", color: "hover:text-gray-400" },
-      { name: "Python", color: "hover:text-yellow-400" },
-      { name: "PHP", color: "hover:text-indigo-400" },
-      { name: "TypeScript", color: "hover:text-blue-500" }
+      { name: "PyTorch", color: "hover:text-orange-400" },
+      { name: "TensorFlow", color: "hover:text-orange-500" },
+      { name: "scikit-learn", color: "hover:text-orange-300" },
+      { name: "OpenCV", color: "hover:text-blue-400" },
+      { name: "Hugging Face Transformers", color: "hover:text-yellow-400" },
+      { name: "LangChain", color: "hover:text-green-400" }
+    ],
+    className: "md:col-span-2"
+  },
+  {
+    title: "Engineering Toolkit",
+    icon: <Code2 className="w-5 h-5 text-primary" />,
+    items: [
+      { name: "Unit Testing", color: "hover:text-green-400" },
+      { name: "Git", color: "hover:text-orange-400" },
+      { name: "Docker", color: "hover:text-blue-400" },
+      { name: "Weights & Biases", color: "hover:text-yellow-400" },
+      { name: "Debugging & Logs", color: "hover:text-red-400" }
+    ],
+    className: "md:col-span-1"
+  },
+  {
+    title: "Computer Science Foundations",
+    icon: <Database className="w-5 h-5 text-primary" />,
+    items: [
+      { name: "Data Structures & Algorithms", color: "hover:text-blue-400" },
+      { name: "Object-Oriented Programming", color: "hover:text-purple-400" },
+      { name: "DBMS", color: "hover:text-cyan-400" },
+      { name: "Operating Systems", color: "hover:text-orange-400" },
+      { name: "Networking", color: "hover:text-green-400" }
     ],
     className: "md:col-span-3"
   }
@@ -96,9 +119,9 @@ const TechStackGraphic = () => {
           className="md:col-span-3 mt-8 p-12 rounded-3xl bg-gradient-to-br from-primary/5 via-transparent to-transparent border border-white/5 relative overflow-hidden text-center"
         >
           <div className="relative z-10">
-            <h4 className="text-4xl font-display text-foreground mb-4">And Much More...</h4>
+            <h4 className="text-4xl font-display text-foreground mb-4">BUILT END TO END</h4>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              From architecting scalable backends to crafting pixel-perfect interfaces, I leverage a diverse ecosystem of tools to bring ideas to life.
+              From shipping backend features and training pipelines to validating changes with unit tests, I take ideas through implementation, debugging, and delivery.
             </p>
           </div>
           
