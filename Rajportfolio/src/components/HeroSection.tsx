@@ -8,7 +8,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section id="home" className="relative h-screen w-full overflow-hidden">
+    <section id="home" tabIndex={-1} className="relative h-screen w-full overflow-hidden">
       {/* Static Background Image */}
       <div className="absolute inset-0">
         <img

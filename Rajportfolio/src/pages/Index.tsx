@@ -1,8 +1,9 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import NetflixIntro from "@/components/NetflixIntro";
 import NetflixNav from "@/components/NetflixNav";
 import HeroSection from "@/components/HeroSection";
-import ContentRow, {
+import ContentRow from "@/components/ContentRow";
+import {
   projectItems,
   experienceItems,
   skillItems,
@@ -10,7 +11,7 @@ import ContentRow, {
   languageItems,
   certificationItems,
   publicationItems
-} from "@/components/ContentRow";
+} from "@/data/portfolio";
 import AboutSection from "@/components/AboutSection";
 import StrangerThings3D from "@/components/StrangerThings3D";
 import ContactSection from "@/components/ContactSection";
@@ -21,6 +22,7 @@ import TechStackGraphic from "@/components/TechStackGraphic";
 
 const Index = () => {
   const [introComplete, setIntroComplete] = useState(false);
+  const [introSkipped, setIntroSkipped] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
   const allItems = [
@@ -37,9 +39,23 @@ const Index = () => {
     setIntroComplete(true);
   }, []);
 
+  useEffect(() => {
+    if (introComplete && introSkipped) {
+      document.getElementById("home")?.focus();
+    }
+  }, [introComplete, introSkipped]);
+
   return (
     <div className="min-h-screen bg-background">
-      {!introComplete && <NetflixIntro onComplete={handleIntroComplete} />}
+      {!introComplete && (
+        <NetflixIntro
+          onComplete={handleIntroComplete}
+          onSkip={() => {
+            setIntroSkipped(true);
+            setIntroComplete(true);
+          }}
+        />
+      )}
 
       {introComplete && (
         <>

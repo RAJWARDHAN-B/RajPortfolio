@@ -93,7 +93,7 @@ const TechStackGraphic = () => {
             </div>
 
             <div className="flex flex-wrap gap-3">
-              {category.items.map((item, itemIdx) => (
+              {category.items.map((item) => (
                 <motion.div
                   key={item.name}
                   whileHover={{ scale: 1.05, y: -5 }}

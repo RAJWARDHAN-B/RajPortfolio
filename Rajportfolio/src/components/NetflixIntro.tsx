@@ -1,14 +1,17 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import tudumSound from "@/assets/sound/netflix-tudum-sfx-n-c.mp3";
 
-const NetflixIntro = ({ onComplete }: { onComplete: () => void }) => {
+const NetflixIntro = ({ onComplete, onSkip }: { onComplete: () => void; onSkip: () => void }) => {
   const [phase, setPhase] = useState<"sound" | "letter" | "done">("sound");
-  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      onComplete();
+      return;
+    }
+
     const audio = new Audio(tudumSound);
-    audioRef.current = audio;
     audio.volume = 0.8;
 
     let timer1: NodeJS.Timeout;
@@ -79,6 +82,16 @@ const NetflixIntro = ({ onComplete }: { onComplete: () => void }) => {
               }}
             />
           </div>
+          <button
+            type="button"
+            onClick={(event) => {
+              event.stopPropagation();
+              onSkip();
+            }}
+            className="absolute bottom-8 right-8 rounded-sm border border-foreground/70 bg-card px-5 py-2 text-sm font-semibold text-foreground hover:bg-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          >
+            Skip intro
+          </button>
         </motion.div>
       )}
     </AnimatePresence>

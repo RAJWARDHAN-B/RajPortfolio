@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Search, Bell, X, FileText, Download, User as UserIcon, LogOut } from "lucide-react";
+import { Search, X, FileText, Download, User as UserIcon } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,7 +16,9 @@ const NetflixNav = ({ onSearch }: { onSearch?: (query: string) => void }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [pendingTarget, setPendingTarget] = useState<string | null>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
+  const searchButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -24,11 +26,34 @@ const NetflixNav = ({ onSearch }: { onSearch?: (query: string) => void }) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (searchOpen) searchInputRef.current?.focus();
+  }, [searchOpen]);
+
+  useEffect(() => {
+    if (!pendingTarget || searchQuery) return;
+    const frame = requestAnimationFrame(() => {
+      document.getElementById(pendingTarget)?.scrollIntoView({ behavior: "smooth" });
+      setPendingTarget(null);
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [pendingTarget, searchQuery]);
+
   const scrollTo = (id: string) => {
     const normalized = id.toLowerCase().replace(/\s+/g, "-");
-    const el = document.getElementById(normalized);
-    el?.scrollIntoView({ behavior: "smooth" });
+    if (searchQuery) {
+      setSearchQuery("");
+      onSearch?.("");
+    }
+    setPendingTarget(normalized);
     setMobileOpen(false);
+  };
+
+  const closeSearch = () => {
+    setSearchOpen(false);
+    setSearchQuery("");
+    onSearch?.("");
+    searchButtonRef.current?.focus();
   };
 
   return (
@@ -38,12 +63,14 @@ const NetflixNav = ({ onSearch }: { onSearch?: (query: string) => void }) => {
     >
       <div className="flex items-center justify-between px-4 md:px-12 py-3">
         <div className="flex items-center gap-8">
-          <img
-            src="/Rnetflixfulltext.png"
-            alt="RAJWARDHAN"
-            className="h-8 md:h-10 cursor-pointer object-contain"
+          <button
+            type="button"
+            aria-label="Go to home"
             onClick={() => scrollTo("home")}
-          />
+            className="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          >
+            <img src="/Rnetflixfulltext.png" alt="RAJWARDHAN" className="h-8 md:h-10 object-contain" />
+          </button>
 
           {/* Desktop nav */}
           <ul className="hidden md:flex items-center gap-5">
@@ -66,59 +93,63 @@ const NetflixNav = ({ onSearch }: { onSearch?: (query: string) => void }) => {
             className={`flex items-center transition-all duration-300 ${searchOpen ? "bg-black/80 border border-white px-2 py-1" : ""
               }`}
           >
-            <Search
-              className="w-5 h-5 text-foreground cursor-pointer hover:text-muted-foreground transition-colors"
+            <button
+              ref={searchButtonRef}
+              type="button"
+              aria-label={searchOpen ? "Close search" : "Open search"}
+              aria-expanded={searchOpen}
+              aria-controls="portfolio-search"
+              className="text-foreground hover:text-muted-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
               onClick={() => {
-                setSearchOpen(!searchOpen);
-                if (!searchOpen) {
-                  setTimeout(() => searchInputRef.current?.focus(), 100);
-                } else if (!searchQuery) {
-                  // If closing and empty query, close it and clear
-                  setSearchQuery("");
-                  onSearch?.("");
-                }
+                if (searchOpen) closeSearch();
+                else setSearchOpen(true);
               }}
-            />
+            >
+              <Search className="w-5 h-5" aria-hidden="true" />
+            </button>
             {searchOpen && (
               <input
+                id="portfolio-search"
                 ref={searchInputRef}
-                type="text"
+                type="search"
+                aria-label="Search portfolio"
                 value={searchQuery}
                 onChange={(e) => {
                   setSearchQuery(e.target.value);
                   onSearch?.(e.target.value);
                 }}
                 placeholder="Titles, skills, categories"
-                className="bg-transparent text-white focus:outline-none text-sm ml-2 w-32 md:w-48 transition-all"
-                onBlur={() => {
-                  if (!searchQuery) {
-                    setSearchOpen(false);
-                  }
+                className="bg-transparent text-white text-sm ml-2 w-32 md:w-48 transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
+                onKeyDown={(event) => {
+                  if (event.key === "Escape") closeSearch();
                 }}
               />
             )}
             {searchOpen && searchQuery && (
-              <X
-                className="w-4 h-4 text-muted-foreground cursor-pointer ml-1 hover:text-white"
+              <button
+                type="button"
+                aria-label="Clear search"
+                className="text-muted-foreground ml-1 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
                 onClick={() => {
                   setSearchQuery("");
                   onSearch?.("");
                   searchInputRef.current?.focus();
                 }}
-              />
+              >
+                <X className="w-4 h-4" aria-hidden="true" />
+              </button>
             )}
           </div>
 
-          <Bell className="w-5 h-5 text-foreground cursor-pointer hover:text-muted-foreground transition-colors hidden sm:block" />
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <div className="w-8 h-8 rounded overflow-hidden flex items-center justify-center cursor-pointer transition-transform hover:scale-110">
+              <button type="button" aria-label="Open profile menu" className="w-8 h-8 rounded overflow-hidden flex items-center justify-center cursor-pointer transition-transform hover:scale-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
                 <img
                   src="/Rnetflixicon.png"
-                  alt="Profile"
+                  alt=""
                   className="w-full h-full object-cover"
                 />
-              </div>
+              </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56 bg-netflix-dark/95 backdrop-blur-md border-neutral-800 text-white" align="end">
               <DropdownMenuLabel className="flex items-center gap-2">
@@ -145,17 +176,16 @@ const NetflixNav = ({ onSearch }: { onSearch?: (query: string) => void }) => {
                 <Download className="w-4 h-4" />
                 <span>Download CV</span>
               </DropdownMenuItem>
-              <DropdownMenuSeparator className="bg-neutral-800" />
-              <DropdownMenuItem className="cursor-pointer hover:bg-white/10 flex items-center gap-2 opacity-50 cursor-not-allowed">
-                <LogOut className="w-4 h-4" />
-                <span>Sign Out of Portfolio</span>
-              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
 
           {/* Mobile hamburger */}
           <button
-            className="md:hidden flex flex-col gap-1"
+            type="button"
+            aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-navigation"
+            className="md:hidden flex flex-col gap-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             onClick={() => setMobileOpen(!mobileOpen)}
           >
             <span className={`w-5 h-0.5 bg-foreground transition-transform ${mobileOpen ? "rotate-45 translate-y-1.5" : ""}`} />
@@ -167,7 +197,7 @@ const NetflixNav = ({ onSearch }: { onSearch?: (query: string) => void }) => {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="md:hidden bg-netflix-dark/95 backdrop-blur-sm border-t border-border">
+        <div id="mobile-navigation" className="md:hidden bg-netflix-dark/95 backdrop-blur-sm border-t border-border">
           <ul className="flex flex-col py-4">
             {navItems.map((item) => (
               <li key={item}>
