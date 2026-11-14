@@ -5,8 +5,8 @@ import { terrainHeight } from "./layout";
 import { createRandom, smoothstep } from "./noise";
 import { useWorld } from "./runtime";
 
-export const FOG_COLOR = "#1c0b11";
-export const FOG_DENSITY = 0.021;
+export const FOG_COLOR = "#2b0f18";
+export const FOG_DENSITY = 0.019;
 
 export function Sky() {
   const { fx } = useWorld();
@@ -18,7 +18,7 @@ export function Sky() {
           uTime: { value: 0 },
           uFlash: { value: 0 },
           uHorizon: { value: new THREE.Color(FOG_COLOR) },
-          uZenith: { value: new THREE.Color("#030205") },
+          uZenith: { value: new THREE.Color("#07040b") },
           uRift: { value: new THREE.Vector3(-0.55, 0.42, -0.72).normalize() },
         },
         vertexShader: /* glsl */ `
@@ -68,9 +68,10 @@ export function Sky() {
             float riftCore = pow(facing, 26.0);
             float riftGlow = pow(facing, 4.0);
             float mask = clouds * smoothstep(-0.04, 0.22, height);
-            vec3 cloudColor = mix(vec3(0.028, 0.01, 0.018), vec3(0.34, 0.035, 0.045), riftGlow * 0.95 + 0.06);
+            vec3 cloudColor = mix(vec3(0.05, 0.016, 0.03), vec3(0.5, 0.05, 0.06), riftGlow * 0.95 + 0.1);
             color = mix(color, cloudColor, mask);
-            color += vec3(1.0, 0.09, 0.07) * riftCore * (1.0 - mask * 0.5) * 0.9;
+            color += vec3(1.0, 0.09, 0.07) * riftCore * (1.0 - mask * 0.5) * 1.4;
+            color += vec3(0.25, 0.02, 0.03) * riftGlow * 0.35;
             color += vec3(0.95, 0.4, 0.48) * uFlash * (0.2 + mask) * smoothstep(-0.1, 0.25, height);
             gl_FragColor = vec4(color, 1.0);
             #include <tonemapping_fragment>

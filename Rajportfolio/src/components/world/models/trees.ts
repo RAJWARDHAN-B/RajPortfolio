@@ -26,9 +26,9 @@ const merge = (parts: THREE.BufferGeometry[]) => {
 /** Layered fir: drooping, noise-jittered tiers plus outward branch fans for a ragged silhouette. */
 export function createPineGeometry(seed: number) {
   const random = createRandom(seed);
-  const needleDark = new THREE.Color("#121c17");
-  const needleLight = new THREE.Color("#2c3b31");
-  const needleRust = new THREE.Color("#3b2a22");
+  const needleDark = new THREE.Color("#18241e");
+  const needleLight = new THREE.Color("#4a5e4f");
+  const needleRust = new THREE.Color("#5a3a2c");
   const parts: THREE.BufferGeometry[] = [];
   const tiers = 7;
   const tierColor = (x: number, y: number, z: number, radius: number, tierY: number) => {
@@ -152,8 +152,8 @@ export function createGrassGeometry(seed: number) {
   const random = createRandom(seed);
   const positions: number[] = [];
   const colors: number[] = [];
-  const base = new THREE.Color("#1c1c12");
-  const tip = new THREE.Color("#6d6043");
+  const base = new THREE.Color("#262619");
+  const tip = new THREE.Color("#8c7a52");
   for (let blade = 0; blade < 9; blade++) {
     const angle = random() * Math.PI * 2;
     const height = 0.35 + random() * 0.45;

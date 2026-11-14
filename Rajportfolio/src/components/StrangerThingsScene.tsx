@@ -582,11 +582,11 @@ function World(props: WorldSceneProps) {
     <WorldContext.Provider value={runtime}>
       <color attach="background" args={[FOG_COLOR]} />
       <fogExp2 attach="fog" args={[FOG_COLOR, FOG_DENSITY]} />
-      <hemisphereLight args={["#5c4160", "#140708", 0.6]} />
+      <hemisphereLight args={["#8a6890", "#1d0a0d", 1.1]} />
       <directionalLight
         ref={moon}
-        color="#9393d8"
-        intensity={0.6}
+        color="#a9a6ec"
+        intensity={1.1}
         shadow-mapSize={[2048, 2048]}
         shadow-camera-left={-45}
         shadow-camera-right={45}
@@ -648,7 +648,7 @@ const StrangerThingsScene = (props: WorldSceneProps) => (
     gl={{ antialias: true, powerPreference: "high-performance", stencil: false }}
     onCreated={({ gl }) => {
       gl.toneMapping = THREE.ACESFilmicToneMapping;
-      gl.toneMappingExposure = 1.2;
+      gl.toneMappingExposure = 1.35;
     }}
     style={{ touchAction: "none" }}
   >

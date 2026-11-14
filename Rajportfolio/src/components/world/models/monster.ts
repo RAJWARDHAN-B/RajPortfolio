@@ -14,6 +14,7 @@ export interface MonsterRig {
   body: THREE.Group;
   head: THREE.Group;
   jaw: THREE.Group;
+  faceLight: THREE.PointLight;
   arms: MonsterArm[];
   legs: { hip: THREE.Group; knee: THREE.Group }[];
   tendrils: THREE.Group[];
@@ -42,8 +43,8 @@ export function createMonster(skinBump: THREE.Texture | null, seed = 7): Monster
     bumpScale: 2.5,
   });
   const bone = new THREE.MeshStandardMaterial({ color: "#cbbfa9", roughness: 0.45 });
-  const eyeMaterial = new THREE.MeshStandardMaterial({ color: "#ff2a1a", emissive: "#ff1a10", emissiveIntensity: 5, toneMapped: false });
-  const mouthMaterial = new THREE.MeshStandardMaterial({ color: "#2a0003", emissive: "#a0000c", emissiveIntensity: 1.6, toneMapped: false });
+  const eyeMaterial = new THREE.MeshStandardMaterial({ color: "#ff2a1a", emissive: "#ff1a10", emissiveIntensity: 3, toneMapped: false });
+  const mouthMaterial = new THREE.MeshStandardMaterial({ color: "#2a0003", emissive: "#6a0008", emissiveIntensity: 0.6 });
 
   const add = (geometry: THREE.BufferGeometry, material: THREE.Material, parent: THREE.Object3D, position: [number, number, number] = [0, 0, 0]) => {
     const mesh = new THREE.Mesh(geometry, material);
@@ -111,6 +112,9 @@ export function createMonster(skinBump: THREE.Texture | null, seed = 7): Monster
   const jaw = new THREE.Group();
   jaw.position.set(0, -0.04, 0.02);
   head.add(jaw);
+  const faceLight = new THREE.PointLight("#ffc2b0", 0, 3, 2);
+  faceLight.position.set(0, 0.25, 0.65);
+  head.add(faceLight);
   add(new THREE.SphereGeometry(0.1, 16, 10, 0, Math.PI * 2, Math.PI / 2, Math.PI / 2), skin, jaw, [0, 0, 0.04]).scale.set(0.9, 0.9, 1.25);
   for (let tooth = 0; tooth < 8; tooth++) {
     const angle = -0.85 + (tooth / 7) * 1.7;
@@ -167,6 +171,7 @@ export function createMonster(skinBump: THREE.Texture | null, seed = 7): Monster
     body,
     head,
     jaw,
+    faceLight,
     arms,
     legs,
     tendrils,

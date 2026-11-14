@@ -68,6 +68,8 @@ export const createVehicleState = (x: number, z: number, heading: number): Vehic
  */
 export function stepVehicle(state: VehicleState, input: VehicleInput, dt: number, onRoad = true) {
   const step = Math.min(dt, 0.05);
+  // Zero-length frames (such as the first one) would otherwise divide by zero and poison the body pose with NaN.
+  if (!(step > 0)) return state;
   const speedLimit = onRoad ? VEHICLE.maxSpeed : VEHICLE.offRoadMaxSpeed;
   let acceleration = 0;
   state.braking = false;

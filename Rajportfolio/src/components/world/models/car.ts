@@ -263,12 +263,13 @@ export function createCar(envMap: THREE.Texture | null): CarRig {
   box([1.6, 0.2, 0.42], interior, [0, 0.93, 0.74]);
   const dashTop = box([1.6, 0.05, 0.34], trim, [0, 1.04, 0.74]);
   dashTop.rotation.x = -0.18;
-  const binnacle = new THREE.CylinderGeometry(0.17, 0.17, 0.32, 18, 1, true, 0, Math.PI);
-  binnacle.rotateZ(Math.PI / 2);
-  add(binnacle, darkMaterial, body, [0.38, 1.0, 0.64], false);
+  // Instrument hood: the upper half of a short tube pointing at the driver, shading the gauges.
+  const binnacle = new THREE.CylinderGeometry(0.17, 0.17, 0.12, 18, 1, true, Math.PI / 2, Math.PI);
+  binnacle.rotateX(Math.PI / 2);
+  add(binnacle, darkMaterial, body, [0.38, 1.0, 0.53], false);
 
   const gaugeGroup = new THREE.Group();
-  gaugeGroup.position.set(0.38, 1.0, 0.585);
+  gaugeGroup.position.set(0.38, 1.0, 0.524);
   gaugeGroup.rotation.y = Math.PI;
   body.add(gaugeGroup);
   const createGauge = (kind: "speed" | "rpm", x: number) => {
@@ -296,21 +297,24 @@ export function createCar(envMap: THREE.Texture | null): CarRig {
 
   const radioTexture = createRadioTexture();
   textures.push(radioTexture);
-  box([0.32, 0.22, 0.3], trim, [0, 0.86, 0.72]);
+  box([0.34, 0.34, 0.24], trim, [0, 0.76, 0.5]);
+  box([0.24, 0.16, 0.9], trim, [0, 0.52, 0]);
   const radio = add(
     new THREE.PlaneGeometry(0.2, 0.05),
     new THREE.MeshStandardMaterial({ map: radioTexture, emissiveMap: radioTexture, emissive: "#ffffff", emissiveIntensity: 1.2 }),
     body,
-    [0, 0.93, 0.565],
+    [0, 0.85, 0.376],
     false,
   );
   radio.rotation.y = Math.PI;
+  add(new THREE.CylinderGeometry(0.012, 0.016, 0.2, 8), chrome, body, [0, 0.68, 0.16], false).rotation.x = -0.25;
+  add(new THREE.SphereGeometry(0.035, 12, 10), trim, body, [0, 0.78, 0.135], false);
   box([0.24, 0.06, 0.02], chrome, [0, 1.33, 0.18]);
   for (const side of [-1, 1]) {
     const visor = box([0.5, 0.02, 0.22], interior, [side * 0.38, 1.37, 0.12]);
     visor.rotation.x = 0.25;
   }
-  const wiperBase = 0.97;
+  const wiperBase = 0.995;
   for (const x of [-0.35, 0.3]) {
     const wiper = box([0.5, 0.015, 0.02], trim, [x, wiperBase, 0.96]);
     wiper.rotation.z = 0.12;
@@ -323,7 +327,7 @@ export function createCar(envMap: THREE.Texture | null): CarRig {
   steeringMount.add(steeringWheel);
   body.add(steeringMount);
   add(new THREE.TorusGeometry(0.18, 0.019, 12, 40), trim, steeringWheel, undefined, false);
-  for (const angle of [Math.PI / 2, Math.PI * 1.2, Math.PI * 1.8]) {
+  for (const angle of [0, Math.PI, Math.PI * 1.5]) {
     const spoke = add(new THREE.BoxGeometry(0.17, 0.028, 0.018), trim, steeringWheel, [Math.cos(angle) * 0.09, Math.sin(angle) * 0.09, 0], false);
     spoke.rotation.z = angle;
   }

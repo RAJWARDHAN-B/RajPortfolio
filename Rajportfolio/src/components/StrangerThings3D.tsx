@@ -1,4 +1,4 @@
-import { Component, useCallback, useEffect, useRef, useState, type ErrorInfo, type ReactNode } from "react";
+import { Component, useCallback, useEffect, useRef, useState, type ErrorInfo, type MouseEvent, type ReactNode } from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import {
   ArrowDown,
@@ -80,6 +80,43 @@ const canUseWebGL = () => {
     return false;
   }
 };
+
+function HudButton({
+  icon,
+  label,
+  shortcut,
+  pressed,
+  disabled,
+  hint,
+  onClick,
+}: {
+  icon: ReactNode;
+  label: string;
+  shortcut?: string;
+  pressed?: boolean;
+  disabled?: boolean;
+  hint?: string;
+  onClick: (event: MouseEvent<HTMLButtonElement>) => void;
+}) {
+  return (
+    <button
+      type="button"
+      className={hudButton}
+      onClick={onClick}
+      disabled={disabled}
+      aria-pressed={pressed}
+      aria-label={label}
+      aria-keyshortcuts={shortcut}
+      title={hint ?? (shortcut ? `${label} (${shortcut})` : label)}
+    >
+      <span aria-hidden="true">{icon}</span>
+      <span aria-hidden="true" className="hidden xl:inline">
+        {label}
+        {shortcut && <span className="ml-1 text-white/55">{shortcut}</span>}
+      </span>
+    </button>
+  );
+}
 
 const hudButton =
   "inline-flex items-center gap-2 rounded-sm border border-white/15 bg-black/60 px-3 py-2 text-xs font-semibold uppercase tracking-wider text-white backdrop-blur-md transition-colors hover:border-primary hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary aria-pressed:border-primary aria-pressed:bg-primary/80 disabled:cursor-not-allowed disabled:opacity-45";
@@ -460,74 +497,84 @@ const StrangerThings3D = () => {
               <div key={scareCount} aria-hidden="true" className="pointer-events-none absolute inset-0 z-10 animate-[scare-flash_0.9s_ease-out_forwards] bg-[radial-gradient(circle,transparent_35%,rgba(150,0,10,0.85))]" />
             )}
 
-            <div className="pointer-events-none absolute inset-x-0 top-0 z-30 flex flex-wrap items-start justify-between gap-3 p-3 md:p-5">
+            <div className="pointer-events-none absolute inset-x-0 top-0 z-30 flex items-start justify-between gap-2 p-3 md:p-5">
               <div className="pointer-events-auto flex flex-wrap gap-2" role="toolbar" aria-label="World controls">
-                <button type="button" className={hudButton} onClick={switchMode} disabled={!inCar && !nearby.car} title={!inCar && !nearby.car ? "Walk back to the car to get in" : undefined}>
-                  {inCar ? <Footprints className="h-4 w-4" aria-hidden="true" /> : <Car className="h-4 w-4" aria-hidden="true" />}
-                  {inCar ? "Get out (E)" : "Get in car (E)"}
-                </button>
-                <button type="button" className={hudButton} onClick={switchView} aria-pressed={settings.view === "first"}>
-                  <Eye className="h-4 w-4" aria-hidden="true" />
-                  {inCar ? "Driver's seat (C)" : "First person (C)"}
-                </button>
+                <HudButton
+                  icon={inCar ? <Footprints className="h-4 w-4" /> : <Car className="h-4 w-4" />}
+                  label={inCar ? "Get out" : "Get in car"}
+                  shortcut="E"
+                  onClick={switchMode}
+                  disabled={!inCar && !nearby.car}
+                  hint={!inCar && !nearby.car ? "Walk back to the car to get in" : undefined}
+                />
+                <HudButton
+                  icon={<Eye className="h-4 w-4" />}
+                  label={inCar ? "Driver's seat" : "First person"}
+                  shortcut="C"
+                  pressed={settings.view === "first"}
+                  onClick={switchView}
+                />
                 {inCar ? (
                   <>
-                    <button type="button" className={hudButton} onClick={() => toggle("headlights", "Headlights")} aria-pressed={settings.headlights}>
-                      <Lightbulb className="h-4 w-4" aria-hidden="true" /> Headlights (L)
-                    </button>
-                    <button type="button" className={hudButton} onClick={() => toggle("highBeams", "High beams")} aria-pressed={settings.highBeams} disabled={!settings.headlights}>
-                      <Zap className="h-4 w-4" aria-hidden="true" /> High beams (B)
-                    </button>
+                    <HudButton icon={<Lightbulb className="h-4 w-4" />} label="Headlights" shortcut="L" pressed={settings.headlights} onClick={() => toggle("headlights", "Headlights")} />
+                    <HudButton icon={<Zap className="h-4 w-4" />} label="High beams" shortcut="B" pressed={settings.highBeams} disabled={!settings.headlights} onClick={() => toggle("highBeams", "High beams")} />
                   </>
                 ) : (
-                  <button type="button" className={hudButton} onClick={() => toggle("flashlight", "Flashlight")} aria-pressed={settings.flashlight}>
-                    <Flashlight className="h-4 w-4" aria-hidden="true" /> Flashlight (L)
-                  </button>
+                  <HudButton icon={<Flashlight className="h-4 w-4" />} label="Flashlight" shortcut="L" pressed={settings.flashlight} onClick={() => toggle("flashlight", "Flashlight")} />
                 )}
-                <button type="button" className={hudButton} onClick={(event) => openMenu(event.currentTarget)}>
-                  <List className="h-4 w-4" aria-hidden="true" /> Projects (P)
-                </button>
+                <HudButton icon={<List className="h-4 w-4" />} label="Projects" shortcut="P" onClick={(event) => openMenu(event.currentTarget)} />
               </div>
               <div className="pointer-events-auto flex flex-wrap justify-end gap-2">
-                <button type="button" className={hudButton} onClick={() => toggle("scares", "Jump scares")} aria-pressed={settings.scares}>
-                  <Ghost className="h-4 w-4" aria-hidden="true" /> Scares
-                </button>
-                <button type="button" className={hudButton} onClick={() => toggle("sound", "Sound")} aria-pressed={settings.sound} aria-label={settings.sound ? "Mute sound (M)" : "Unmute sound (M)"}>
-                  {settings.sound ? <Volume2 className="h-4 w-4" aria-hidden="true" /> : <VolumeX className="h-4 w-4" aria-hidden="true" />}
-                </button>
-                <button
-                  type="button"
-                  className={hudButton}
-                  onClick={() => {
+                <HudButton icon={<Ghost className="h-4 w-4" />} label="Jump scares" pressed={settings.scares} onClick={() => toggle("scares", "Jump scares")} />
+                <HudButton
+                  icon={settings.sound ? <Volume2 className="h-4 w-4" /> : <VolumeX className="h-4 w-4" />}
+                  label="Sound"
+                  shortcut="M"
+                  pressed={settings.sound}
+                  onClick={() => toggle("sound", "Sound")}
+                />
+                <HudButton
+                  icon={<Sparkles className="h-4 w-4" />}
+                  label="High quality"
+                  pressed={settings.quality === "high"}
+                  onClick={() =>
                     setSettings((current) => {
                       const quality = current.quality === "high" ? "low" : "high";
-                      announce(`${quality === "high" ? "High" : "Performance"} graphics`);
+                      announce(quality === "high" ? "High quality graphics" : "Performance graphics");
                       return { ...current, quality };
-                    });
-                  }}
-                  aria-pressed={settings.quality === "high"}
-                >
-                  <Sparkles className="h-4 w-4" aria-hidden="true" /> {settings.quality === "high" ? "High" : "Fast"}
-                </button>
-                <button type="button" className={hudButton} onClick={() => setHelpOpen((value) => !value)} aria-pressed={helpOpen} aria-label="Show controls">
-                  <CircleHelp className="h-4 w-4" aria-hidden="true" />
-                </button>
+                    })
+                  }
+                />
+                <HudButton icon={<CircleHelp className="h-4 w-4" />} label="Controls help" pressed={helpOpen} onClick={() => setHelpOpen((value) => !value)} />
                 <DialogPrimitive.Close className={`${hudButton} border-primary/60`} aria-label="Exit 3D world">
-                  <X className="h-4 w-4" aria-hidden="true" /> Exit
+                  <X className="h-4 w-4" aria-hidden="true" />
+                  <span className="hidden lg:inline">Exit</span>
                 </DialogPrimitive.Close>
               </div>
             </div>
 
             {helpOpen && ready && (
-              <div className="pointer-events-auto absolute left-3 top-[5.5rem] z-30 max-w-xs rounded-sm border border-white/10 bg-black/70 p-4 text-xs leading-relaxed text-white/85 backdrop-blur-md md:left-5">
+              <div
+                className={`pointer-events-auto absolute z-30 max-w-xs rounded-sm border border-white/10 bg-black/70 p-4 text-xs leading-relaxed text-white/85 backdrop-blur-md ${
+                  isTouch ? "left-3 top-16" : "bottom-6 left-6"
+                }`}
+              >
                 <p className="mb-2 font-display text-lg tracking-wider text-primary">Controls</p>
-                <ul className="space-y-1">
-                  <li><kbd className="text-white">W A S D</kbd> / arrows: {inCar ? "drive and steer" : "walk"}</li>
-                  <li>{inCar ? <><kbd className="text-white">Space</kbd>: handbrake · <kbd className="text-white">H</kbd>: horn</> : <><kbd className="text-white">Shift</kbd>: run</>}</li>
-                  <li>Drag the mouse to look around; scroll to zoom</li>
-                  <li><kbd className="text-white">E</kbd>: get in/out · <kbd className="text-white">C</kbd>: change view · <kbd className="text-white">R</kbd>: recentre</li>
-                  <li><kbd className="text-white">F</kbd> or click a billboard: open the project</li>
-                </ul>
+                {isTouch ? (
+                  <ul className="space-y-1">
+                    <li>Hold the arrow pad to {inCar ? "drive and steer" : "walk"}</li>
+                    <li>Drag the scene to look around</li>
+                    <li>Tap a billboard to open its project</li>
+                  </ul>
+                ) : (
+                  <ul className="space-y-1">
+                    <li><kbd className="text-white">W A S D</kbd> / arrows: {inCar ? "drive and steer" : "walk"}</li>
+                    <li>{inCar ? <><kbd className="text-white">Space</kbd>: handbrake · <kbd className="text-white">H</kbd>: horn</> : <><kbd className="text-white">Shift</kbd>: run</>}</li>
+                    <li>Drag to look around · scroll to zoom</li>
+                    <li><kbd className="text-white">E</kbd>: get in/out · <kbd className="text-white">C</kbd>: view · <kbd className="text-white">R</kbd>: recentre</li>
+                    <li><kbd className="text-white">F</kbd> or click a billboard: open project</li>
+                  </ul>
+                )}
                 <button type="button" className="mt-3 text-primary underline-offset-4 hover:underline" onClick={() => setHelpOpen(false)}>
                   Hide controls
                 </button>
@@ -541,7 +588,7 @@ const StrangerThings3D = () => {
                   onClick={(event) => nearby.project && openProject(nearby.project, event.currentTarget)}
                   className="flex items-center gap-3 rounded-sm border border-primary/70 bg-black/75 px-5 py-3 text-left backdrop-blur-md hover:bg-black/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
                 >
-                  <kbd className="rounded-sm bg-primary px-2 py-1 font-display text-lg leading-none">F</kbd>
+                  {!isTouch && <kbd className="rounded-sm bg-primary px-2 py-1 font-display text-lg leading-none">F</kbd>}
                   <span>
                     <span className="block text-[10px] uppercase tracking-[0.25em] text-white/60">Nearby project</span>
                     <span className="font-display text-2xl leading-none tracking-wide">{nearby.project.title}</span>
@@ -551,12 +598,17 @@ const StrangerThings3D = () => {
             )}
             {!inCar && nearby.car && ready && !nearby.project && (
               <p className="pointer-events-none absolute bottom-28 left-1/2 z-30 -translate-x-1/2 rounded-sm bg-black/70 px-4 py-2 text-sm md:bottom-10">
-                Press <kbd className="font-semibold text-primary">E</kbd> to get back in the car
+                {isTouch ? "Tap “Get in car” to drive again" : <>Press <kbd className="font-semibold text-primary">E</kbd> to get back in the car</>}
               </p>
             )}
 
             {inCar && ready && (
-              <div aria-hidden="true" className="pointer-events-none absolute bottom-4 right-4 z-30 rounded-sm border border-white/10 bg-black/60 px-4 py-2 text-right backdrop-blur-md md:bottom-6 md:right-6">
+              <div
+                aria-hidden="true"
+                className={`pointer-events-none absolute right-4 z-30 rounded-sm border border-white/10 bg-black/60 px-4 py-2 text-right backdrop-blur-md md:right-6 ${
+                  isTouch ? "top-16" : "bottom-6"
+                }`}
+              >
                 <span ref={speedReadout} className="font-display text-5xl leading-none tabular-nums">0</span>
                 <span className="ml-1 text-xs uppercase tracking-widest text-white/60">km/h</span>
               </div>

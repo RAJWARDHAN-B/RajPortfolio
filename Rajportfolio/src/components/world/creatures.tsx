@@ -102,7 +102,8 @@ export function CreatureDirector({ onScare }: { onScare: () => void }) {
       current.nextTwitch = time + 0.35 + random() * 1.6;
     }
     const distanceToPlayer = Math.hypot(current.position.x - player.x, current.position.z - player.z);
-    monster.eyeMaterial.emissiveIntensity = current.phase === "scare" ? 9 : 5;
+    monster.eyeMaterial.emissiveIntensity = current.phase === "scare" ? 5 : 3;
+    monster.faceLight.intensity = current.phase === "scare" ? 3.5 : 0;
 
     switch (current.phase) {
       case "hidden": {

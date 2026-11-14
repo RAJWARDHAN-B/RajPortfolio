@@ -58,7 +58,7 @@ export function Effects() {
   const pipeline = useMemo(() => {
     const target = new THREE.WebGLRenderTarget(1, 1, { type: THREE.HalfFloatType, samples: 4 });
     const composer = new EffectComposer(gl, target);
-    const bloom = new UnrealBloomPass(new THREE.Vector2(256, 256), 0.8, 0.55, 0.85);
+    const bloom = new UnrealBloomPass(new THREE.Vector2(256, 256), 0.55, 0.4, 0.92);
     const cinematic = new ShaderPass(CinematicShader);
     composer.addPass(new RenderPass(scene, camera));
     composer.addPass(bloom);
