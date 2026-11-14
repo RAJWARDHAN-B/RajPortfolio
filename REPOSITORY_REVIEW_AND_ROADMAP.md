@@ -194,6 +194,8 @@ The build confirms that the 134-byte ASCII model stub is copied into `dist/model
 6. **Documentation and cleanup:** replace the nested template README, resolve duplicate configs and unused starter assets, and keep root/app documentation aligned.
 7. **Only then expand presentation themes:** reuse verified content and the finalized image inventory rather than copying the current hard-coded records into additional layouts.
 
+8. also for the 3D view: include different monsters with different sounds, some just walking randomly, then there's a huge black screen when the quality is high. then the person looks a bit different, can change that.
+
 ## Final acceptance checklist
 
 - [ ] Featured project thumbnails are accurate, legible, and approved for publication.
