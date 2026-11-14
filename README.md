@@ -2,8 +2,6 @@
 
 <img src="Rajportfolio/public/Rnetflixfulltext.png" alt="RAJWARDHAN" width="360" />
 
-# RAJWARDHAN
-
 ### Engineering stories worth shipping.
 
 An IT Engineering student at PICT Pune building full-stack products and exploring computer vision.
