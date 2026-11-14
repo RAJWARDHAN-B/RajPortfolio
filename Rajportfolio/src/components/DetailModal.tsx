@@ -12,7 +12,7 @@ const DetailModal = ({
 }: {
   item: ContentItem;
   onClose: () => void;
-  returnFocusRef: RefObject<HTMLButtonElement>;
+  returnFocusRef: RefObject<HTMLElement>;
 }) => (
   <DialogPrimitive.Root open onOpenChange={(open) => { if (!open) onClose(); }}>
     <DialogPortal>

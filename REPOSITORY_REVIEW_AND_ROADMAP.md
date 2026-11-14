@@ -25,6 +25,7 @@ The first implementation pass has addressed the baseline issues that did not req
 - Made portfolio and search cards keyboard-operable, with focus-managed detail dialogs, Escape-to-close, and working project links where available.
 - Added a skip-intro button and bypassed the animated intro for reduced-motion users; made navigation and search controls keyboard accessible.
 - Removed nonfunctional card actions, the notification bell, and the inactive sign-out menu item.
+- Replaced the floating-card 3D demo with The Shadow Road, an optional original world with a car, on-foot exploration, six featured project displays, and a complete accessible project list.
 
 The seven user-supplied experience logos now appear on the corresponding experience cards, including a new Learncraft internship entry. The original project images remain unchanged and should still be reviewed for accuracy.
 
@@ -98,21 +99,19 @@ This is a source review, not a live-site review: deployed URLs, external integra
 
 ### P1 — Make the 3D section a polished extension of the portfolio (in progress)
 
-**Current state:** [`StrangerThings3D.tsx`](Rajportfolio/src/components/StrangerThings3D.tsx) already provides an opt-in Three.js scene, floating project cards, OrbitControls, a loading indicator, and a project-detail overlay. The project cards are currently text on 3D boxes rather than visual previews, and the detail overlay does not offer a project/demo link.
+**Current state:** [`StrangerThings3D.tsx`](Rajportfolio/src/components/StrangerThings3D.tsx) provides an opt-in original Three.js world. Visitors can drive, get out and explore six featured project displays, or skip the drive. The complete project list is available without entering the scene; details use the shared accessible dialog and include a link only when one is present in the portfolio data.
 
-**Model issue:** `public/models/dead_by_daylight_-_the_first.glb` is only 134 bytes and `file` identifies it as ASCII text, not a binary GLB. The same 134-byte file is copied into `dist/models/`. The `CentralModel` component is commented out, with a source note that the original model was about 127 MB and caused parse/VRAM problems.
+**Model issue:** `public/models/dead_by_daylight_-_the_first.glb` is only 134 bytes and `file` identifies it as ASCII text, not a binary GLB. It is not used by the current procedural scene.
 
 **Recommendation:**
 
-- Keep the 3D section optional and load the scene code only after activation. **Implemented:** the initial JavaScript is down from 1,502 kB minified (444.72 kB gzip) to 561.54 kB (178.12 kB gzip). The separate 3D chunk remains 940.46 kB (266.36 kB gzip) and still triggers Vite's large-chunk warning.
-- Replace the text-only cards with project screenshots or carefully optimized thumbnails, and include a clear action to open each project's verified live site, repository, or case study.
-- **Implemented:** the project detail overlay now offers a link when the selected record has a URL.
+- Keep the 3D section optional and load the scene code only after activation. **Implemented:** the separate 3D chunk remains large and still triggers Vite's chunk-size warning.
+- **Implemented:** featured displays show existing project imagery; details offer an external link when the record has one. Images and destinations still need content verification.
 - Replace the unusable GLB with an original/licensed, optimized model only if it adds real value. Otherwise remove the stale model file and keep the lightweight procedural scene.
-- Provide an equivalent keyboard-accessible 2D project list and a graceful message/fallback when WebGL is unavailable. Respect reduced-motion preferences, touch users, and low-powered devices.
-- Handle WebGL context loss/recovery, avoid leaving `document.body.style.cursor` modified after unmount, and verify that the scene cleans up listeners/resources.
-- Consider changing the show-inspired “Upside Down” branding to an original visual direction and use only artwork/assets you have permission to publish.
+- **Implemented:** a keyboard-accessible project list, touch and keyboard movement controls, reduced-motion camera behavior, and a message when WebGL fails or its context is lost. Re-entering the world retries after context loss.
+- Check performance and touch controls on physical low-powered devices, and continue auditing screen-reader behavior and image ownership.
 
-**Done when:** initial page load does not download the 3D chunk/model; activating the section yields a responsive, keyboard-accessible project experience; every 3D selection has a working project action; WebGL failure does not block the rest of the portfolio.
+**Done when:** initial page load does not download the 3D chunk/model; activating the section yields a responsive, keyboard-accessible project experience; available project destinations are verified; WebGL failure does not block the rest of the portfolio.
 
 ### P2 — Improve accessibility and make controls work without a mouse (in progress)
 
@@ -120,7 +119,7 @@ This is a source review, not a live-site review: deployed URLs, external integra
 
 **Remaining:**
 
-- Provide keyboard-accessible 3D alternatives and extend reduced-motion support beyond the intro.
+- Extend reduced-motion support beyond the intro and 3D world.
 - Verify contrast, heading order, link purpose, form labels, screen-reader behavior, and reading order on mobile and desktop.
 
 **Done when:** the contact form and 3D alternative are also usable with keyboard and a screen reader, and reduced-motion behavior is consistent throughout.

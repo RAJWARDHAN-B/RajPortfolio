@@ -187,6 +187,16 @@
     }
   }
 
+  @keyframes scare-flash {
+    0% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+    }
+  }
+
   .text-shadow-hero {
     text-shadow: 2px 2px 8px hsl(0 0% 0% / 0.8);
   }
